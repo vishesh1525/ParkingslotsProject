@@ -17,8 +17,9 @@ app.use(cookieParser())
 import healthcheckRouter from "./routes/healthcheck.routes.js"
 import loginroutes from "./routes/loginroutes.routes.js"
 import Vechileroutes from "./routes/Vechile.routes.js"
+import Parkingspotroutes from "./routes/Parkingspots.routes.js"
 app.use("/api/v1/healthcheck",healthcheckRouter)
 app.use("/api/v1",loginroutes)
 app.use("/api/v1",Vechileroutes)
-
+app.use("/api/v1",Parkingspotroutes)
 export {app}
