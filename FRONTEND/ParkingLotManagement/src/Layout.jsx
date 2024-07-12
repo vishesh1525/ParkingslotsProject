@@ -4,11 +4,11 @@ import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 function Layout() {
   return (
-    <>
+    <div className="min-h-screen bg-gray-100">
     <Header/>
     <Outlet/>
     <Footer/>
-    </>
+    </div>
   )
 }
 

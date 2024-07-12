@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import React from 'react'
 import {Link, NavLink} from 'react-router-dom'
+import logo from '../../assets/logo.svg'
 
 export default function Header() {
    
@@ -12,17 +13,21 @@ export default function Header() {
                 <div className="flex flex-wrap justify-between items-center ">
                     <Link to="/" className="flex items-center">
                         <img
+<<<<<<< HEAD
+                            src={logo}
+=======
                             src="public/icons8-citroen.svg"
+>>>>>>> c4c30e7c7db74255b3eeee65f9c8ef46a4b3068e
                             className="mr-3 h-12"
                             alt="Logo"
                         />
                     </Link>
                     <div className="flex items-center lg:order-2">
                         <Link
-                            to="#"
+                            to="/logIn"
                             className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
                         >
-                            Log in
+                            Sign In
                         </Link>
                         <Link
                             to="#"
