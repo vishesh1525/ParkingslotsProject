@@ -15,7 +15,8 @@ export const login = async (req, res) => {
   try {
     const user = await User.findOne({ email }); // find user by email
     if (!(user && (await bcrypt.compare(password, user.password)))) {
-      return res.status(404).json(new ApiError(404, "Invalid credentials"));
+      console.log("pASSWORD NOT MATCHING")
+      return res.status(404).json("Invalid credentials");
     }
 
     const token = createSecretToken(user._id);
@@ -27,7 +28,7 @@ export const login = async (req, res) => {
       httpOnly: true, // Cookie cannot be accessed via client-side scripts
       sameSite: "None",
     });
-
+    console.log("user registred sucesfully");
     res.json({ token });
   } catch (error) {
     console.error("Got an error", error);

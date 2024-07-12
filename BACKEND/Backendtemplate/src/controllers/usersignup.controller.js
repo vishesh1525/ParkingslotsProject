@@ -6,8 +6,8 @@ import { ApiError } from "../utils/ApiError.js";
 export const createUser = async (req, res) => {
   try {
     // Check if all required fields are provided
-    const { email, password, fullname, username } = req.body;
-    if (!email || !password || !fullname || !username) {
+    const { email, password, fullname, username,role } = req.body;
+    if (!email || !password || !fullname || !username ||!role) {
       return res.status(400).json(new ApiError(400, "All input is required"));
     }
 
@@ -27,6 +27,7 @@ export const createUser = async (req, res) => {
       username,
       email,
       password: hashedPassword,
+      role:role
     });
 
     // Save the user to the database

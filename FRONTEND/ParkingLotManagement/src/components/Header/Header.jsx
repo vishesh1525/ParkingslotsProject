@@ -1,15 +1,18 @@
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import React from 'react'
 import {Link, NavLink} from 'react-router-dom'
 
 export default function Header() {
+   
     return (
         <header className="shadow sticky z-50 top-0">
-            <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
-                <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+            <nav className="bg-slate-400 border-gray-200 px-0 lg:px-6 py-2.5">
+                <div className="flex flex-wrap justify-between items-center ">
                     <Link to="/" className="flex items-center">
                         <img
-                            src="https://alexharkness.com/wp-content/uploads/2020/06/logo-2.png"
+                            src="public/icons8-citroen.svg"
                             className="mr-3 h-12"
                             alt="Logo"
                         />
@@ -79,5 +82,7 @@ export default function Header() {
                 </div>
             </nav>
         </header>
+
+      
     );
 }

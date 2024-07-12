@@ -24,6 +24,7 @@ const ParkingSpotsSchema=new Schema({
     },
     status:{
         type:String,
+        default:"Available",
         enum:["Available","Not  Available"]
     }
 },{

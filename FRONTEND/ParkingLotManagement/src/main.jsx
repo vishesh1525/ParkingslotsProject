@@ -9,6 +9,7 @@ import Home from './components/Home/Home.jsx'
 import About from './components/About/About.jsx'
 import Contact from './components/Contact/Contact.jsx'
 import User from './components/User/User.jsx'
+import Signup from './components/Signup/Signup.jsx'
 const router =createBrowserRouter([
   {
     path:"/",
@@ -25,12 +26,18 @@ const router =createBrowserRouter([
       {
         path:"Contact",
         element:<Contact/>
+      },
+      {
+        path:"Parking View",
+        element:<Contact/>
       }
-    ]
+      
+    ],
+    
   },
   {
-    path:"/User",
-    element:<User/>
+    path:"Register",
+    element:<Signup/>
   }
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
