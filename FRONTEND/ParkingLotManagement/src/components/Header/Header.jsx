@@ -1,16 +1,23 @@
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import React from 'react'
 import {Link, NavLink} from 'react-router-dom'
 import logo from '../../assets/logo.svg'
 
 export default function Header() {
+   
     return (
         <header className="shadow sticky z-50 top-0">
-            <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
-                <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+            <nav className="bg-slate-400 border-gray-200 px-0 lg:px-6 py-2.5">
+                <div className="flex flex-wrap justify-between items-center ">
                     <Link to="/" className="flex items-center">
                         <img
+<<<<<<< HEAD
                             src={logo}
+=======
+                            src="public/icons8-citroen.svg"
+>>>>>>> c4c30e7c7db74255b3eeee65f9c8ef46a4b3068e
                             className="mr-3 h-12"
                             alt="Logo"
                         />
@@ -80,5 +87,7 @@ export default function Header() {
                 </div>
             </nav>
         </header>
+
+      
     );
 }
