@@ -7,8 +7,10 @@ import { RouterProvider, createBrowserRouter,createRoutesFromElements} from 'rea
 import Layout from './Layout.jsx'
 import Home from './components/Home/Home.jsx'
 import About from './components/About/About.jsx'
-import Contact from './components/Contact/Contact.jsx'
-import User from './components/User/User.jsx'
+import Contact from './components/Contact/Contact.jsx' 
+import CustomerForm from './components/SmallReusableComponents/CustomerForm.jsx'
+import LogIn from './components/SmallReusableComponents/LogIn.jsx'
+
 const router =createBrowserRouter([
   {
     path:"/",
@@ -25,12 +27,16 @@ const router =createBrowserRouter([
       {
         path:"Contact",
         element:<Contact/>
+      }, 
+      {
+        path:"logIn",
+        element:<LogIn></LogIn>
+      },
+      {
+        path:"Register",
+        element:<CustomerForm/>
       }
     ]
-  },
-  {
-    path:"/User",
-    element:<User/>
   }
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
