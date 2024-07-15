@@ -10,6 +10,7 @@ import About from './components/About/About.jsx'
 import Contact from './components/Contact/Contact.jsx' 
 import CustomerForm from './components/SmallReusableComponents/CustomerForm.jsx'
 import LogIn from './components/SmallReusableComponents/LogIn.jsx'
+import VehicleForm from './components/SmallReusableComponents/VehicleForm .jsx'
 
 const router =createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router =createBrowserRouter([
       {
         path:"Register",
         element:<CustomerForm/>
+      },
+      {
+        path:"Register2",
+        element:<VehicleForm/>
       }
     ]
   }
