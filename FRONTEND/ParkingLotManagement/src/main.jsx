@@ -11,6 +11,8 @@ import Contact from './components/Contact/Contact.jsx'
 import CustomerForm from './components/SmallReusableComponents/CustomerForm.jsx'
 import LogIn from './components/SmallReusableComponents/LogIn.jsx'
 import VehicleForm from './components/SmallReusableComponents/VehicleForm .jsx'
+import Signup from './components/Signup/Signup.jsx'
+import Header from './components/Header2/Header.jsx'
 
 const router =createBrowserRouter([
   {
@@ -21,6 +23,7 @@ const router =createBrowserRouter([
         path:"",
         element:<Home/>
       },
+      
       {
         path:"About",
         element:<About/>
@@ -35,13 +38,18 @@ const router =createBrowserRouter([
       },
       {
         path:"Register",
-        element:<CustomerForm/>
+        element:<Signup/>    
       },
       {
         path:"Register2",
         element:<VehicleForm/>
       }
-    ]
+    ],
+    
+  },
+  {
+    path:"/Home",
+    element:<Header/>
   }
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
