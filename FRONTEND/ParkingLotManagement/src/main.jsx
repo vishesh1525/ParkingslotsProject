@@ -7,9 +7,14 @@ import { RouterProvider, createBrowserRouter,createRoutesFromElements} from 'rea
 import Layout from './Layout.jsx'
 import Home from './components/Home/Home.jsx'
 import About from './components/About/About.jsx'
-import Contact from './components/Contact/Contact.jsx'
-// import User from './components/User/User.jsx'
-import Signup from './components/Signup/Signup.jsx'
+import Contact from './components/Contact/Contact.jsx' 
+import CustomerForm from './components/SmallReusableComponents/CustomerForm.jsx'
+import LogIn from './components/SmallReusableComponents/LogIn.jsx'
+import VehicleForm from './components/SmallReusableComponents/VehicleForm .jsx'
+// import Signup from './components/Signup/Signup.jsx'
+import Header from './components/Header2/Header.jsx'
+import ParkingView from './components/ParkingView/ParkingView.jsx'
+
 const router =createBrowserRouter([
   {
     path:"/",
@@ -19,6 +24,7 @@ const router =createBrowserRouter([
         path:"",
         element:<Home/>
       },
+      
       {
         path:"About",
         element:<About/>
@@ -26,18 +32,30 @@ const router =createBrowserRouter([
       {
         path:"Contact",
         element:<Contact/>
+      }, 
+      {
+        path:"logIn",
+        element:<LogIn></LogIn>
+      },
+      
+      {
+        path:"Register2",
+        element:<VehicleForm/>
       },
       {
-        path:"Parking View",
-        element:<Contact/>
+        path:"register",
+        element:<CustomerForm/>
+      },
+      {
+        path:"ParkingView",
+        element:<ParkingView/>
       }
-      
     ],
     
   },
   {
-    path:"Register",
-    element:<Signup/>
+    path:"/Home",
+    element:<Header/>
   }
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
