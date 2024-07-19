@@ -10,8 +10,11 @@ import About from './components/About/About.jsx'
 import Contact from './components/Contact/Contact.jsx' 
 import CustomerForm from './components/SmallReusableComponents/CustomerForm.jsx'
 import LogIn from './components/SmallReusableComponents/LogIn.jsx'
-import ParkingView from './components/ParkingView/ParkingView.jsx';
 import VehicleForm from './components/SmallReusableComponents/VehicleForm .jsx'
+// import Signup from './components/Signup/Signup.jsx'
+import Header from './components/Header2/Header.jsx'
+import ParkingView from './components/ParkingView/ParkingView.jsx'
+
 const router =createBrowserRouter([
   {
     path:"/",
@@ -21,6 +24,7 @@ const router =createBrowserRouter([
         path:"",
         element:<Home/>
       },
+      
       {
         path:"About",
         element:<About/>
@@ -33,15 +37,25 @@ const router =createBrowserRouter([
         path:"logIn",
         element:<LogIn></LogIn>
       },
+      
       {
-        path:"Register",
+        path:"Register2",
+        element:<VehicleForm/>
+      },
+      {
+        path:"register",
         element:<CustomerForm/>
       },
       {
-        path: 'ParkingView',
-        element: <ParkingView />
-      },
-    ]
+        path:"ParkingView",
+        element:<ParkingView/>
+      }
+    ],
+    
+  },
+  {
+    path:"/Home",
+    element:<Header/>
   }
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(

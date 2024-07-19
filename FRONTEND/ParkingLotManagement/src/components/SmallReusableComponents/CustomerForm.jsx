@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../../assets/logo.svg';
 import { Link } from 'react-router-dom';
-import VehicleForm from './VehicleForm ';
 
 const CustomerForm = () => {
   const [formValues, setFormValues] = useState({
@@ -10,7 +9,9 @@ const CustomerForm = () => {
     email: '',
     password: '',
     ph_no_1: '',
-    ph_no_2: ''
+    ph_no_2: '',
+    role: 'user', // Default value
+    username: '' // New field
   });
 
   const handleChange = (e) => {
@@ -28,7 +29,9 @@ const CustomerForm = () => {
     <div className="bg-gray-50 font-[sans-serif]">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full">
-          <a href="javascript:void(0)"><img src={logo} alt="logo" className='w-45 mb-8 mx-auto block rounded-lg' /></a>
+          <a href="javascript:void(0)">
+            <img src={logo} alt="logo" className='w-45 mb-8 mx-auto block rounded-lg' />
+          </a>
           <div className="p-8 rounded-2xl bg-white shadow">
             <h2 className="text-gray-800 text-center text-2xl font-bold">Register</h2>
             <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
@@ -78,6 +81,17 @@ const CustomerForm = () => {
                   onChange={handleChange}
                 />
               </div>
+              <div>
+                <input 
+                  name="username" 
+                  type="text" 
+                  required 
+                  className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
+                  placeholder="Username" 
+                  value={formValues.username} 
+                  onChange={handleChange}
+                />
+              </div>
               <div className="flex gap-4">
                 <div className="flex-1">
                   <input 
@@ -102,8 +116,17 @@ const CustomerForm = () => {
                 </div>
               </div>
               <div>
-                {/* <VehicleForm/> */}
+                <select
+                  name="role"
+                  className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  value={formValues.role}
+                  onChange={handleChange}
+                >
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
+                </select>
               </div>
+             
               <div className="!mt-8">
                 <button 
                   type="submit" 
