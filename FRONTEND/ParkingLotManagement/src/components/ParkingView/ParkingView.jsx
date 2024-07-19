@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const slots = [
+const initialSlots = [
   { id: 1, booked: false, style: { gridArea: '1 / 1 / 2 / 2' } },
   { id: 2, booked: false, style: { gridArea: '1 / 2 / 2 / 3' } },
   { id: 3, booked: false, style: { gridArea: '1 / 3 / 2 / 4' } },
@@ -24,12 +25,43 @@ const slots = [
 ];
 
 const ParkingView = () => {
-  const [parkingSlots, setParkingSlots] = useState(slots);
+  const [parkingSlots, setParkingSlots] = useState(initialSlots);
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const navigate = useNavigate();
 
-  const handleBookSlot = (id) => {
-    setParkingSlots(
-      parkingSlots.map(slot => slot.id === id ? { ...slot, booked: !slot.booked } : slot)
-    );
+  useEffect(() => {
+    // Check if a slot booking was completed and update the status
+    const slotToUpdate = localStorage.getItem('bookedSlotId');
+    if (slotToUpdate) {
+      setParkingSlots(parkingSlots.map(slot => 
+        slot.id === parseInt(slotToUpdate) ? { ...slot, booked: true } : slot
+      ));
+      localStorage.removeItem('bookedSlotId');
+    }
+  }, [parkingSlots]);
+
+  const handleSelectSlot = (id) => {
+    if (selectedSlot === null || selectedSlot === id) {
+      setSelectedSlot(id);
+    }
+  };
+
+  const handleBookSlot = () => {
+    if (selectedSlot !== null) {
+      // Save the selected slot to localStorage to be used on the payment page
+      localStorage.setItem('selectedSlotId', selectedSlot);
+      navigate(`/payment/${selectedSlot}`);
+    }
+  };
+
+  const handleUnreserveSlot = () => {
+    if (selectedSlot !== null) {
+      // Logic to unreserve the slot
+      setParkingSlots(parkingSlots.map(slot => 
+        slot.id === selectedSlot ? { ...slot, booked: false } : slot
+      ));
+      setSelectedSlot(null);
+    }
   };
 
   return (
@@ -40,12 +72,36 @@ const ParkingView = () => {
           <div
             key={slot.id}
             style={slot.style}
-            className={`flex items-center justify-center border-2 rounded cursor-pointer ${slot.booked ? 'bg-red-500' : 'bg-green-500'}`}
-            onClick={() => handleBookSlot(slot.id)}
+            className={`flex items-center justify-center border-2 rounded cursor-pointer ${
+              slot.booked ? 'bg-yellow-500 border-yellow-800 shadow-lg' : 'bg-green-700 border-green-900 shadow-md'
+            } ${selectedSlot === slot.id ? 'ring-4 ring-blue-300' : ''}`}
+            onClick={() => handleSelectSlot(slot.id)}
+            // Disable clicks on other slots if a slot is already selected
+            onMouseDown={(e) => {
+              if (selectedSlot !== null && selectedSlot !== slot.id) {
+                e.preventDefault();
+              }
+            }}
           >
             <span className="text-white font-bold">Slot {slot.id}</span>
           </div>
         ))}
+      </div>
+      <div className="mt-4">
+        <button
+          onClick={handleBookSlot}
+          disabled={selectedSlot === null || parkingSlots.find(slot => slot.id === selectedSlot)?.booked}
+          className="py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+        >
+          Proceed to Payment
+        </button>
+        <button
+          onClick={handleUnreserveSlot}
+          disabled={selectedSlot === null}
+          className="ml-4 py-2 px-4 bg-red-600 text-white rounded hover:bg-red-700"
+        >
+          Unreserve/Park Completed Slot
+        </button>
       </div>
     </div>
   );

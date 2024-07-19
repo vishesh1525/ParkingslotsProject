@@ -1,74 +1,73 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 
 const VehicleForm = () => {
-  const [vehicleCount, setVehicleCount] = useState(1);
   const [vehicles, setVehicles] = useState([{ vehicle_number: '', vehicle_color: '', vehicle_type: '', vehicle_make: '' }]);
+  const [username, setUsername] = useState('');
+  const navigate = useNavigate();
 
-  const handleVehicleCountChange = (e) => {
-    const count = parseInt(e.target.value);
-    const updatedVehicles = Array(count).fill({ vehicle_number: '', vehicle_color: '', vehicle_type: '', vehicle_make: '' });
-    setVehicleCount(count);
+  const handleVehicleChange = (index, field, value) => {
+    const updatedVehicles = vehicles.map((vehicle, i) =>
+      i === index ? { ...vehicle, [field]: value } : vehicle
+    );
     setVehicles(updatedVehicles);
   };
 
-  
+  const handleAddVehicle = () => {
+    setVehicles([...vehicles, { vehicle_number: '', vehicle_color: '', vehicle_type: '', vehicle_make: '' }]);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Vehicle form submitted:', vehicles);
+    
+    // Example saving logic (you might replace this with API call or state management)
+    const vehicleDetails = { username, vehicles };
+    console.log('Vehicle form submitted:', vehicleDetails);
+
+    // Optionally save details in localStorage or context
+    localStorage.setItem('vehicleDetails', JSON.stringify(vehicleDetails));
+
+    // Navigate to the payment page
+    navigate('/ParkingView');
   };
 
   return (
     <div className="bg-gray-50 font-[sans-serif]">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full">
-          <a href="javascript:void(0)"><img src={logo} alt="logo" className='w-45 mb-8 mx-auto block rounded-lg' /></a>
+          <a href="javascript:void(0)">
+            <img src={logo} alt="logo" className='w-45 mb-8 mx-auto block rounded-lg' />
+          </a>
           <div className="p-8 rounded-2xl bg-white shadow">
             <h2 className="text-gray-800 text-center text-2xl font-bold">Vehicle Details</h2>
             <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
               <div>
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="vehicle_count">Vehicle Count</label>
-                <select 
-                  name="vehicle_count" 
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">Username</label>
+                <input
+                  id="username"
+                  type="text"
                   className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
-                  value={vehicleCount}
-                  onChange={handleVehicleCountChange}
-                >
-                  {[1, 2, 3].map(count => (
-                    <option key={count} value={count}>{count}</option>
-                  ))}
-                </select>
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
               </div>
               {vehicles.map((vehicle, index) => (
                 <div key={index} className="mt-4">
                   <h4 className="text-gray-800 text-lg font-bold">Vehicle {index + 1}</h4>
                   <div className="mt-2">
                     <input 
-                      name={`username`} 
                       type="text" 
                       required 
                       className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
-                      placeholder="Enter the user name" 
+                      placeholder="Vehicle Number" 
                       value={vehicle.vehicle_number} 
                       onChange={(e) => handleVehicleChange(index, 'vehicle_number', e.target.value)}
                     />
                   </div>
                   <div className="mt-2">
                     <input 
-                      name={`vehicle_number_${index}`} 
-                      type="text" 
-                      required 
-                      className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
-                      placeholder="Vehicle Number - KA 05 1992" 
-                      value={vehicle.vehicle_number} 
-                      onChange={(e) => handleVehicleChange(index, 'vehicle_number', e.target.value)}
-                    />
-                  </div>
-                  <div className="mt-2">
-                    <input 
-                      name={`vehicle_color_${index}`} 
                       type="text" 
                       required 
                       className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
@@ -79,45 +78,41 @@ const VehicleForm = () => {
                   </div>
                   <div className="mt-2">
                     <select 
-                      name={`vehicle_type_${index}`} 
                       required 
                       className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                       value={vehicle.vehicle_type} 
                       onChange={(e) => handleVehicleChange(index, 'vehicle_type', e.target.value)}
                     >
                       <option value="" disabled>Vehicle Type</option>
-                      <option value="car">car</option>
-                      <option value="bike">bike</option>
+                      <option value="car">Car</option>
+                      <option value="bike">Bike</option>
                     </select>
                   </div>
                   <div className="mt-2">
-                  <select 
-                      name={`vehicle_type_${index}`} 
+                    <select 
                       required 
                       className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
-                      value={vehicle.vehicle_type} 
-                      onChange={(e) => handleVehicleChange(index, 'vehicle_type', e.target.value)}
+                      value={vehicle.vehicle_make} 
+                      onChange={(e) => handleVehicleChange(index, 'vehicle_make', e.target.value)}
                     >
                       <option value="" disabled>Vehicle Make</option>
-                      <option value="petrol">petrol</option>
-                      <option value="diesel">diesel</option>
+                      <option value="petrol">Petrol</option>
+                      <option value="diesel">Diesel</option>
                       <option value="EV">EV</option>
                     </select>
                   </div>
-                  <div className="mt-2">
-                    <input 
-                      name={`vehicle_color_${index}`} 
-                      type="text" 
-                      required 
-                      className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
-                      placeholder="Vehicle Model" 
-                      value={vehicle.vehicle_color} 
-                      onChange={(e) => handleVehicleChange(index, 'vehicle_color', e.target.value)}
-                    />
-                  </div>
                 </div>
               ))}
-              <div className="!mt-8">
+              <div className="mt-4">
+                <button 
+                  type="button" 
+                  onClick={handleAddVehicle}
+                  className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none"
+                >
+                  Add Another Vehicle
+                </button>
+              </div>
+              <div className="mt-8">
                 <button 
                   type="submit" 
                   className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"

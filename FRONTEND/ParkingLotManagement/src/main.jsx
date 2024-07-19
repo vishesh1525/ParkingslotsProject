@@ -14,6 +14,7 @@ import VehicleForm from './components/SmallReusableComponents/VehicleForm .jsx'
 // import Signup from './components/Signup/Signup.jsx'
 import Header from './components/Header2/Header.jsx'
 import ParkingView from './components/ParkingView/ParkingView.jsx'
+import PaymentForm from './components/Forms/PaymentForm.jsx'
 
 const router =createBrowserRouter([
   {
@@ -49,6 +50,14 @@ const router =createBrowserRouter([
       {
         path:"ParkingView",
         element:<ParkingView/>
+      },
+      {
+        path:'payment/:slotId',
+        element:<PaymentForm/>
+      },
+      {
+        path: "vehicleAdd",
+        element: <VehicleForm />
       }
     ],
     
