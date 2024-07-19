@@ -13,11 +13,7 @@ export default function Header() {
                 <div className="flex flex-wrap justify-between items-center ">
                     <Link to="/" className="flex items-center">
                         <img
-<<<<<<< HEAD
                             src={logo}
-=======
-                            src="public/icons8-citroen.svg"
->>>>>>> c4c30e7c7db74255b3eeee65f9c8ef46a4b3068e
                             className="mr-3 h-12"
                             alt="Logo"
                         />
@@ -86,8 +82,6 @@ export default function Header() {
                     </div>
                 </div>
             </nav>
-        </header>
-
-      
+        </header> 
     );
 }
