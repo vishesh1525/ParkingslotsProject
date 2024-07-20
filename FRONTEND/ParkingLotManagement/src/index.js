@@ -9,6 +9,8 @@ import Header from "./components/Header/Header";
 import ParkingView from "./components/ParkingView/ParkingView";
 import Reservations from "./components/Reservations/Reservations";
 import VehicleForm from "./components/VehicleForm/VehicleForm ";
+import Payment from "./components/Payment/Payment"; 
+import AddSlot from "./components/AddSlot/AddSlot";
 
 export {
   About,
@@ -21,5 +23,7 @@ export {
   ParkingView,
   Reservations,
   VehicleForm,
+  Payment, 
+  AddSlot
 };
 

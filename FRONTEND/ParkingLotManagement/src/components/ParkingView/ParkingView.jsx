@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const slots = [
   { id: 1, booked: false, style: { gridArea: '1 / 1 / 2 / 2' } },
@@ -25,11 +26,13 @@ const slots = [
 
 const ParkingView = () => {
   const [parkingSlots, setParkingSlots] = useState(slots);
+  const navigate = useNavigate();
 
   const handleBookSlot = (id) => {
     setParkingSlots(
       parkingSlots.map(slot => slot.id === id ? { ...slot, booked: !slot.booked } : slot)
     );
+    navigate(`/payment/${id}`); // Navigate to the payment page with slot id
   };
 
   return (

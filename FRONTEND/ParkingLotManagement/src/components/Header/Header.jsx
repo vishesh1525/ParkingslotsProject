@@ -40,6 +40,7 @@ const Header = () => {
             <li><Link to='/contact'>Contact</Link></li>
             <li><Link to='/parkingSpots'>Parking Spots</Link></li>
             <li><Link to='/vehicleRegistration'>Register Vehicle</Link></li>
+            {/* <li><Link to='/AddSlot'>Add Slot</Link></li> */}
           </ul>
         </div>
         <div className="navbar-end">
