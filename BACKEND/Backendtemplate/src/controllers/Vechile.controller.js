@@ -20,35 +20,42 @@ export const getVechiles = async (req, res) => {
 }
 export const createVehicle = async (req, res) => {
   try {
-    const { username, license_plate, vehicle_type, make, model, color } = req.body;
+    const vehicles = Array.isArray(req.body) ? req.body : [req.body];
 
-    
-    const user1 = await User.findOne({ username:username}).select('_id');
-    if (!user1) {
-      console.log("User is not registered");
-      return res.status(400).json(new ApiError(400, "User is not registered"));
+    const responses = [];
+
+    for (const vehicleData of vehicles) {
+      const { username, license_plate, vehicle_type, make, model, color } = vehicleData;
+
+      // Find the user by username and select the _id field
+      const user = await User.findOne({ username }).select('_id');
+      if (!user) {
+        console.log("User is not registered");
+        return res.status(400).json(new ApiError(400, "User is not registered"));
+      }
+
+      // Create a new vehicle entry
+      const vehicle = new Vehicle({
+        user_id: user._id,
+        license_plate,
+        vehicle_type,
+        make,
+        model,
+        color
+      });
+
+      // Save the vehicle entry
+      const response = await vehicle.save();
+      responses.push(response);
     }
 
-    
-    const vehicle = new Vehicle({
-      user_id:user1,
-      license_plate: license_plate,
-      vehicle_type,
-      make,
-      model,
-      color
-    });
-
-    
-    const response = await vehicle.save();
-
-    
-    return res.status(201).json(response);
+    return res.status(201).json(responses);
   } catch (error) {
     console.error(error);
     return res.status(500).json(new ApiError(500, "Internal Server Error"));
   }
 };
+
 
 export const deleteVehicle = async (req, res) => {
   try {

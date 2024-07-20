@@ -15,7 +15,14 @@ const userSchema = new Schema({
     lowercase: true,
     trim: true,
   },
-  fullname: {
+  firstname: {
+    type: String,
+    required: true,
+    lowercase: true,
+    trim: true,
+    index: true,
+  },
+  lastname: {
     type: String,
     required: true,
     lowercase: true,
@@ -30,6 +37,10 @@ const userSchema = new Schema({
     type:String,
     enum:["Admin","User"],
     required:true
+  },
+  Phone_no:{
+    type:[String],
+    
   }
 }, { timestamps: true });
 

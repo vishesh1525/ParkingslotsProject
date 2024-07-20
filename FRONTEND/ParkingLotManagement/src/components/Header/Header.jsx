@@ -1,13 +1,27 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import Background from '../Header2/Components/Background/Background';
+import Navbar from '../Header2/Components/Navbar/Navbar'; // Assuming you have a Navbar component
+import Hero from '../Header2/Components/Hero/Hero'; // Assuming you have a Hero component
+import dimg1 from "../../assets/dashboard.jpg";
 
-import React from 'react'
-import {Link, NavLink} from 'react-router-dom'
-import logo from '../../assets/logo.svg'
+const Header2 = () => {
+    let heroData = [
+        { text1: "parking", text2: "spots" },
+        { text1: "reserve", text2: "at ease" },
+    ];
+    const [heroCount, setHeroCount] = useState(0);
+    const [playStatus, setPlayStatus] = useState(false);
 
-export default function Header() {
-   
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setHeroCount((count) => (count >= heroData.length ? 0 : count + 1));
+        }, 3000);
+
+        return () => clearInterval(interval); // Clear interval on component unmount
+    }, []);
+
     return (
+<<<<<<< HEAD
         <header className="shadow sticky z-50 top-0">
             <nav className="bg-slate-400 border-gray-200 px-0 lg:px-6 py-2.5">
                 <div className="flex flex-wrap justify-between items-center ">
@@ -83,5 +97,46 @@ export default function Header() {
                 </div>
             </nav>
         </header> 
+=======
+        <section>
+            <div>
+                {/* <Background playStatus={playStatus} heroCount={heroCount} /> */}
+
+                {/* <Hero
+                setPlayStatus={setPlayStatus}
+                heroData={heroData}
+                heroCount={heroData[heroCount]} // Fix: pass the correct heroData
+                setHeroCount={setHeroCount}
+                playStatus={playStatus}
+            /> */}
+            </div>
+            <div id="mainDiv">
+                <div
+                    className="hero min-h-screen text-white"
+                    style={{
+                        backgroundImage: `url(${dimg1})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat'
+                    }}
+                >
+                    <Background playStatus={playStatus} heroCount={heroCount} />
+                    <div className="hero-overlay bg-opacity-60"></div>
+                    <div className="hero-content text-neutral-content text-center">
+                        <div className="max-w-md">
+                            <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
+                            <p className="mb-5">
+                                Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+                                quasi. In deleniti eaque aut repudiandae et a id nisi.
+                            </p>
+                            <button className="btn btn-primary">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+>>>>>>> 5a3dc8ffa77014a99e47bb62dbb3a6b8e5f4c915
     );
-}
+};
+
+export default Header2;

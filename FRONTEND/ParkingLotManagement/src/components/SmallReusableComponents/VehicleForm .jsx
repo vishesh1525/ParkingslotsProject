@@ -12,12 +12,7 @@ const VehicleForm = () => {
     setVehicles(updatedVehicles);
   };
 
-  const handleVehicleChange = (index, field, value) => {
-    const updatedVehicles = vehicles.map((vehicle, i) =>
-      i === index ? { ...vehicle, [field]: value } : vehicle
-    );
-    setVehicles(updatedVehicles);
-  };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,6 +46,17 @@ const VehicleForm = () => {
                   <h4 className="text-gray-800 text-lg font-bold">Vehicle {index + 1}</h4>
                   <div className="mt-2">
                     <input 
+                      name={`username`} 
+                      type="text" 
+                      required 
+                      className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
+                      placeholder="Enter the user name" 
+                      value={vehicle.vehicle_number} 
+                      onChange={(e) => handleVehicleChange(index, 'vehicle_number', e.target.value)}
+                    />
+                  </div>
+                  <div className="mt-2">
+                    <input 
                       name={`vehicle_number_${index}`} 
                       type="text" 
                       required 
@@ -80,19 +86,33 @@ const VehicleForm = () => {
                       onChange={(e) => handleVehicleChange(index, 'vehicle_type', e.target.value)}
                     >
                       <option value="" disabled>Vehicle Type</option>
-                      <option value="2-wheeler">2 Wheeler</option>
-                      <option value="4-wheeler">4 Wheeler</option>
+                      <option value="car">car</option>
+                      <option value="bike">bike</option>
+                    </select>
+                  </div>
+                  <div className="mt-2">
+                  <select 
+                      name={`vehicle_type_${index}`} 
+                      required 
+                      className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                      value={vehicle.vehicle_type} 
+                      onChange={(e) => handleVehicleChange(index, 'vehicle_type', e.target.value)}
+                    >
+                      <option value="" disabled>Vehicle Make</option>
+                      <option value="petrol">petrol</option>
+                      <option value="diesel">diesel</option>
+                      <option value="EV">EV</option>
                     </select>
                   </div>
                   <div className="mt-2">
                     <input 
-                      name={`vehicle_make_${index}`} 
+                      name={`vehicle_color_${index}`} 
                       type="text" 
                       required 
                       className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
-                      placeholder="Vehicle Make" 
-                      value={vehicle.vehicle_make} 
-                      onChange={(e) => handleVehicleChange(index, 'vehicle_make', e.target.value)}
+                      placeholder="Vehicle Model" 
+                      value={vehicle.vehicle_color} 
+                      onChange={(e) => handleVehicleChange(index, 'vehicle_color', e.target.value)}
                     />
                   </div>
                 </div>
