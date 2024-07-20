@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import logo from '../../assets/logo.svg';
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+
 const VehicleForm = () => {
+  const [username, setUsername] = useState('');
   const [vehicleCount, setVehicleCount] = useState(1);
-  const [vehicles, setVehicles] = useState([{ username: '', license_plate: '', vehicle_type: '', make: '', model: '', color: '' }]);
+  const [vehicles, setVehicles] = useState([{ license_plate: '', vehicle_type: '', make: '', model: '', color: '' }]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
   const handleVehicleCountChange = (e) => {
     const count = parseInt(e.target.value);
-    const updatedVehicles = Array(count).fill({ username: '', license_plate: '', vehicle_type: '', make: '', model: '', color: '' });
+    const updatedVehicles = Array(count).fill({ license_plate: '', vehicle_type: '', make: '', model: '', color: '' });
     setVehicleCount(count);
     setVehicles(updatedVehicles);
   };
@@ -22,9 +26,11 @@ const VehicleForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      const response = await axios.post('http://localhost:7000/api/v1/vehicles', vehicles, {
-        withCredentials:true,
+      const vehicleData = vehicles.map(vehicle => ({ ...vehicle, username }));
+      const response = await axios.post('http://localhost:7000/api/v1/vehicles', vehicleData, {
+        withCredentials: true,
         headers: {
           'Content-Type': 'application/json'
         }
@@ -33,9 +39,11 @@ const VehicleForm = () => {
     } catch (error) {
       setError(error.message);
       console.error('Error submitting vehicle form:', error.response?.data?.message || error.message);
+    } finally {
+      setLoading(false);
     }
     const navigate = useNavigate();
-    const authStatus = useSelector((state => state.adminAuth.isAuthenticated))
+    const authStatus = useSelector((state => state.adminAuth.isAuthenticated));
   };
 
   return (
@@ -46,6 +54,17 @@ const VehicleForm = () => {
           <div className="p-8 rounded-2xl bg-white shadow">
             <h2 className="text-gray-800 text-center text-2xl font-bold">Vehicle Details</h2>
             <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
+              <div className="mt-4">
+                <input 
+                  name="username" 
+                  type="text" 
+                  required 
+                  className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
+                  placeholder="Enter the user name" 
+                  value={username} 
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
               <div>
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="vehicle_count">Vehicle Count</label>
                 <select 
@@ -62,17 +81,6 @@ const VehicleForm = () => {
               {vehicles.map((vehicle, index) => (
                 <div key={index} className="mt-4">
                   <h4 className="text-gray-800 text-lg font-bold">Vehicle {index + 1}</h4>
-                  <div className="mt-2">
-                    <input 
-                      name={`username_${index}`} 
-                      type="text" 
-                      required 
-                      className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
-                      placeholder="Enter the user name" 
-                      value={vehicle.username} 
-                      onChange={(e) => handleVehicleChange(index, 'username', e.target.value)}
-                    />
-                  </div>
                   <div className="mt-2">
                     <input 
                       name={`license_plate_${index}`} 
@@ -139,9 +147,11 @@ const VehicleForm = () => {
                 <button 
                   type="submit" 
                   className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
+                  disabled={loading}
                 >
-                  Submit Vehicle Details
+                  {loading ? 'Submitting...' : 'Submit Vehicle Details'}
                 </button>
+                {error && <p className="text-red-500 mt-4">{error}</p>}
               </div>
             </form>
           </div>
