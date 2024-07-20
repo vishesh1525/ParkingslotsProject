@@ -20,9 +20,7 @@ const router = createBrowserRouter(
       <Route path='parkingSpots' element={<ParkingView />} />
       <Route path='payment/:id' element={<Payment />} />
       <Route path='AddSlot' element={<AddSlot />} />
-
-
-
+      {/* <Route path='CustomerForm' element={<CustomerForm />} />  */}
     </Route>
   )
 )
