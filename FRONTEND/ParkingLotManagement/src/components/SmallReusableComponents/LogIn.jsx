@@ -31,7 +31,7 @@ const LogIn = () => {
 
       console.log("Login successful", response.data.user);
       dispatch(login(response.data.user));
-      navigate("/dashboard");
+      navigate("/");
     } catch (error) {
       const errorMsg = error.response?.data?.message || "Network error, please try again later.";
       setError(errorMsg);
@@ -39,7 +39,7 @@ const LogIn = () => {
     } finally {
       setLoading(false);
     }
-  };y4
+  };
 
   return (
     <div className="bg-gray-50 font-[sans-serif]">
