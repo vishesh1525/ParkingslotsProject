@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Header = () => {
+  
   return (
     <header>
       <div className="navbar bg-base-100">
@@ -43,7 +44,7 @@ const Header = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <Link to='/button' className="btn">Button</Link>
+          <Link to='/login' className="btn">login</Link>
         </div>
       </div>
     </header>

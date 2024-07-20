@@ -8,7 +8,7 @@ import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import ParkingView from "./components/ParkingView/ParkingView";
 import Reservations from "./components/Reservations/Reservations";
-import VehicleForm from "./components/Vehicles/VehicleForm ";
+import VehicleForm from "./components/VehicleForm/VehicleForm ";
 
 export {
   About,

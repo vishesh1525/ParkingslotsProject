@@ -19,7 +19,7 @@ export default function Footer() {
                 <p>
                     Book My Spot
                     <br />
-                    Providing y tech since 1992
+                    Providing reliable tech since 1992
                 </p>
             </aside>
             <nav>
