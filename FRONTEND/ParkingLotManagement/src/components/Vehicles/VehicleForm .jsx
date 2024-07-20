@@ -63,9 +63,9 @@ const VehicleForm = () => {
     <div className="bg-gray-50 font-[sans-serif]">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full">
-          <a href="javascript:void(0)"><img src={logo} alt="logo" className='w-45 mb-8 mx-auto block rounded-lg' /></a>
+          {/* <a href="javascript:void(0)"><img src={logo} alt="logo" className='w-45 mb-8 mx-auto block rounded-lg' /></a> */}
           <div className="p-8 rounded-2xl bg-white shadow">
-            <h2 className="text-gray-800 text-center text-2xl font-bold">Vehicle Details</h2>
+            <h2 className="text-gray-900 text-center text-2xl font-bold">Vehicle Details</h2>
             <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
               <div className="mt-4">
                 <input 
@@ -82,7 +82,7 @@ const VehicleForm = () => {
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="vehicle_count">Vehicle Count</label>
                 <select 
                   name="vehicle_count" 
-                  className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600"
                   value={vehicleCount}
                   onChange={handleVehicleCountChange}
                 >
@@ -93,13 +93,13 @@ const VehicleForm = () => {
               </div>
               {vehicles.map((vehicle, index) => (
                 <div key={index} className="mt-4">
-                  <h4 className="text-gray-800 text-lg font-bold">Vehicle {index + 1}</h4>
+                  <h4 className="text-white text-lg font-bold">Vehicle {index + 1}</h4>
                   <div className="mt-2">
                     <input 
                       name={`license_plate_${index}`} 
                       type="text" 
                       required 
-                      className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
+                      className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600" 
                       placeholder="Vehicle Number - KA 05 1992" 
                       value={vehicle.license_plate} 
                       onChange={(e) => handleVehicleChange(index, 'license_plate', e.target.value)}
@@ -110,7 +110,7 @@ const VehicleForm = () => {
                       name={`color_${index}`} 
                       type="text" 
                       required 
-                      className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
+                      className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600" 
                       placeholder="Vehicle Color" 
                       value={vehicle.color} 
                       onChange={(e) => handleVehicleChange(index, 'color', e.target.value)}
@@ -120,7 +120,7 @@ const VehicleForm = () => {
                     <select 
                       name={`vehicle_type_${index}`} 
                       required 
-                      className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                      className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600"
                       value={vehicle.vehicle_type} 
                       onChange={(e) => handleVehicleChange(index, 'vehicle_type', e.target.value)}
                     >
@@ -148,7 +148,7 @@ const VehicleForm = () => {
                       name={`model_${index}`} 
                       type="text" 
                       required 
-                      className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
+                      className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600" 
                       placeholder="Vehicle Model" 
                       value={vehicle.model} 
                       onChange={(e) => handleVehicleChange(index, 'model', e.target.value)}
@@ -156,7 +156,7 @@ const VehicleForm = () => {
                   </div>
                 </div>
               ))}
-              <div className="!mt-8">
+              <div className="mt-8">
                 <button 
                   type="submit" 
                   className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"

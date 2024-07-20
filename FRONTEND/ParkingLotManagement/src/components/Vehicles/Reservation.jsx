@@ -3,22 +3,24 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom"
+
 const ReservationForm = () => {
   const [username, setUsername] = useState('');
-  const [selectedSpot,setspots] = useState('');
-  
-
+  const [selectedSpot, setspots] = useState('');
   const [endTime, setEndTime] = useState('');
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [loading,setloading]=useState(null);
+  const [loading, setloading] = useState(null);
+  const navigate = useNavigate()
+
   const usernameFromStore = useSelector((state) => state.auth.user?.username);
   useEffect(() => {
     if (usernameFromStore) {
-        setUsername(usernameFromStore);
+      setUsername(usernameFromStore);
     }
   }, [usernameFromStore]);
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,8 +37,10 @@ const ReservationForm = () => {
       setSuccess("Reservation successfully made!");
       toast.success("Sucesfully created reservation")
       console.log('Reservation successful:', response.data);
+      navigate("/payment")
+
     } catch (error) {
-     toast.error("Error",error)
+      toast.error("Error", error)
       console.error('Error making reservation:', error.message);
       setError(error.message);
     }
@@ -68,7 +72,7 @@ const ReservationForm = () => {
             required
           />
         </div>
-       
+
         <div>
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="vehicle_license">
             Spot Number
@@ -83,7 +87,7 @@ const ReservationForm = () => {
             required
           />
         </div>
-        
+
         <div>
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="end_time">
             End Time

@@ -8,7 +8,7 @@ const Header = () => {
 
   return (
     <header>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-300">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -32,10 +32,10 @@ const Header = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li><Link to="/">Dashboard</Link></li>
+              <li><Link to="/vehicleRegistration">Register Vehicle</Link></li>
               <li><Link to="/about">About</Link></li>
               <li><Link to="/contact">Contact</Link></li>
               <li><Link to="/parkingSpots">Parking Spots</Link></li>
-              <li><Link to="/vehicleRegistration">Register Vehicle</Link></li>
               {auth === 'Admin' && <li><Link to="/AddSlot">Add Slot</Link></li>}
             </ul>
           </div>
@@ -44,10 +44,10 @@ const Header = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li><Link to="/">Dashboard</Link></li>
+            <li><Link to="/vehicleRegistration">Register Vehicle</Link></li>
             <li><Link to="/about">About</Link></li>
             <li><Link to="/contact">Contact</Link></li>
             <li><Link to="/parkingSpots">Parking Spots</Link></li>
-            <li><Link to="/vehicleRegistration">Register Vehicle</Link></li>
             {auth === 'Admin' && <li><Link to="/AddSlot">Add Slot</Link></li>}
           </ul>
         </div>
@@ -55,7 +55,7 @@ const Header = () => {
           {!authStatus ? (
             <Link to="/login" className="btn">Login</Link>
           ) : (
-            <p>Logout</p>
+            <Link to="/logout" className='btn-ghost'>Logout</Link>
           )}
         </div>
       </div>

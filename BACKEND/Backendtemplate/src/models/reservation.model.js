@@ -26,18 +26,12 @@ const ReservationSchema=new Schema({
             unique:true
         }
      ],
-     vechile_id:[
-        {
-            type:Schema.Types.ObjectId,
-            ref:"Vehicle"
-        }
-     ],
      End_time:
      {
         type:Date,
         required:true
      }
      
-})
+},{timestamps:true})
 
 export const Reservation=mongoose.model("Resrvation",ReservationSchema)

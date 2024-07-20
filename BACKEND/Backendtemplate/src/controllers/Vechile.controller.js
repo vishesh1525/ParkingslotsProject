@@ -12,6 +12,7 @@ export const getVechiles = async (req, res) => {
             console.log("Vehicles are not registered");
             return res.status(400).json(new ApiError(400, "No vehicles registered"));
         }
+        
         return res.status(200).json(response);
     } catch (error) {
         console.error(error);

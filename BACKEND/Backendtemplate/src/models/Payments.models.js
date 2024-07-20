@@ -3,7 +3,7 @@ import mongoose, { Schema } from "mongoose";
 const PaymentSchema = new Schema({
     reservation_id: {
         type: Schema.Types.ObjectId,
-        ref: "ParkingSpots",
+        ref: "Parking Spot", // Ensure this matches the correct model name
         required: true
     },
     user_id: {
@@ -11,14 +11,12 @@ const PaymentSchema = new Schema({
         ref: "User",
         required: true
     },
+    vechile_license: {
+        type: String
+    },
     amount: {
         type: Number,
         required: true
-    },
-    paymentDate: {
-        type: Date,
-        required: true,
-        default: Date.now
     },
     paymentMethod: {
         type: String,
@@ -29,7 +27,7 @@ const PaymentSchema = new Schema({
         type: String,
         validate: {
             validator: function(v) {
-                return this.paymentMethod !== "online-payment" || (this.paymentMethod === "online-payment" && v);
+                return this.paymentMethod !== "online-payment" || v;
             },
             message: "UPI ID is required for online payments"
         }

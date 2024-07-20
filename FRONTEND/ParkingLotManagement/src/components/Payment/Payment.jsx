@@ -1,25 +1,69 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Assuming you might use axios for API calls
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Payment = () => {
     const [vehicles, setVehicles] = useState([]);
+    const [spotnumber, setSpotnumber] = useState('');
     const [selectedVehicle, setSelectedVehicle] = useState('');
     const [amount, setAmount] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('cash');
     const [upiId, setUpiId] = useState('');
-    const [username, setUsername] = useState('');
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const ratePerHour = 20;
+    const user = useSelector(state => state.auth.user?.username);
 
     useEffect(() => {
-        // Fetch vehicles from the API or local state
-        const getallvechiles=async()=>{
-            const response=await axios.get("http://localhost:7000/api/v1/vechile",{
-                withCredentials:true
-            })
-            setVehicles(response.data);
-        }
-        getallvechiles()
+        const getReservations = async () => {
+            if (!user) return; // Exit if user is not defined
+
+            try {
+                const response = await axios.get('http://localhost:7000/api/v1/Reservation', {
+                    params: { username: user },
+                    withCredentials: true
+                });
+
+                if (response.data.length > 0) {
+                    const reservation = response.data[0];
+                    const spot = reservation.Spot_number[0];
+                    const endTime = new Date(reservation.End_time);
+                    const startTime = new Date(reservation.createdAt);
+                    const durationInHours = (endTime - startTime) / (1000 * 60 * 60); // Convert ms to hours
+                    const calculatedAmount = durationInHours * ratePerHour;
+
+                    setAmount(calculatedAmount.toFixed(2)); // Format amount to 2 decimal places
+                    
+                } else {
+                    setError('No reservations found');
+                }
+            } catch (error) {
+                console.error('Error fetching reservations:', error.message);
+                setError('Error fetching reservations');
+            }
+        };
+
+        getReservations();
+    }, [user]);
+
+    useEffect(() => {
+        const getAllVehicles = async () => {
+            try {
+                const response = await axios.get('http://localhost:7000/api/v1/vechile', {
+                    withCredentials: true,
+                });
+
+                setVehicles(response.data);
+            } catch (error) {
+                console.error('Error fetching vehicles:', error.message);
+                setError('Error fetching vehicles');
+            }
+        };
+
+        getAllVehicles();
     }, []);
 
     const handleVehicleChange = (e) => {
@@ -36,87 +80,77 @@ const Payment = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate('/dashboard')
 
-        // Retrieve the selected slot ID from localStorage
-        const selectedSlotId = localStorage.getItem('selectedSlotId');
-        if (!selectedSlotId) return;
+        if (!user || !selectedVehicle || !spotnumber || !amount || !paymentMethod) {
+            setError('Please fill in all required fields');
+            return;
+        }
 
-        // Handle payment form submission
         const paymentData = {
-            reservation_id: selectedVehicle,
-            user_id: 'dummyUserId', // Replace with actual user ID
-            amount: amount,
-            paymentDate: new Date(),
-            paymentMethod: paymentMethod,
+            username: user,
+            vehicle_license: selectedVehicle,
+            reservationspot: spotnumber,
+            amount: parseFloat(amount), // Convert amount to number
+            method: paymentMethod,
             upiId: paymentMethod === 'online-payment' ? upiId : undefined,
-            username: username
         };
 
         try {
-            // Post payment data to the server
-            const response = await axios.post('/api/payments', paymentData);
-
-            // Check the response and handle slot status update
-            if (response.status === 200) {
-                // Update slot status on the server
-                await axios.patch(`/api/slots/${selectedSlotId}`, { booked: true });
-
-                // Save booked slot ID to localStorage
-                localStorage.setItem('bookedSlotId', selectedSlotId);
-
-                // Navigate back to ParkingView
-                navigate('/ParkingView');
-            }
+            await axios.post('http://localhost:7000/api/v1/Payment', paymentData);
+            toast.success("Payment done");
+            navigate('/');
         } catch (error) {
-            console.error('Payment submission error:', error);
+            console.error('Payment submission error:', error.message);
+            toast.error("Payment failure");
+            setError('Payment submission failed');
         }
     };
 
     return (
-        <div className="bg-gray-50 font-[sans-serif]">
+        <div className="bg-gray-600 font-[sans-serif]">
             <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
                 <div className="max-w-md w-full">
-                    <h2 className="text-gray-900 text-center text-2xl font-bold">Payment Details</h2>
+                    <h2 className="text-white text-center text-2xl font-bold">Payment Details</h2>
+                    {error && <p className="text-red-500">{error}</p>}
                     <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
                         <div>
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">Username</label>
+                            <label className="block text-white text-sm font-bold mb-2" htmlFor="username">Username</label>
                             <input
                                 id="username"
                                 type="text"
-                                className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                className="w-full text-gray-700 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                value={user || ''}
+                                
                                 required
                             />
                         </div>
                         <div>
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">Username</label>
+                            <label className="block text-white text-sm font-bold mb-2" htmlFor="spotnumber">Spot Number</label>
                             <input
-                                id="username"
+                                id="spotnumber"
                                 type="text"
-                                className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                className="w-full text-gray-700 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                value={spotnumber}
+                                onChange={(e) => setSpotnumber(e.target.value)}
                                 required
                             />
                         </div>
                         <div className="mt-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="amount">Amount</label>
+                            <label className="block text-white text-sm font-bold mb-2" htmlFor="amount">Amount</label>
                             <input
                                 id="amount"
                                 type="number"
-                                className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                className="w-full text-gray-700 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                                 value={amount}
-                                onChange={(e) => setAmount(e.target.value)}
+                                onChange={(e)=>setAmount(e.target.value)}
                                 required
                             />
                         </div>
                         <div className="mt-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="payment_method">Payment Method</label>
+                            <label className="block text-white text-sm font-bold mb-2" htmlFor="payment_method">Payment Method</label>
                             <select
                                 id="payment_method"
-                                className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                className="w-full text-gray-700 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                                 value={paymentMethod}
                                 onChange={handlePaymentMethodChange}
                                 required
@@ -127,23 +161,24 @@ const Payment = () => {
                         </div>
                         {paymentMethod === 'online-payment' && (
                             <div className="mt-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="upi_id">UPI ID</label>
+                                <label className="block text-white text-sm font-bold mb-2" htmlFor="upi_id">UPI ID</label>
                                 <input
                                     id="upi_id"
                                     type="text"
-                                    className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                    className="w-full text-gray-700 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                                     value={upiId}
                                     onChange={(e) => setUpiId(e.target.value)}
                                 />
                             </div>
                         )}
                         <div>
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="vehicle_select">Select Vehicle</label>
+                            <label className="block text-white text-sm font-bold mb-2" htmlFor="vehicle_select">Select Vehicle</label>
                             <select
                                 id="vehicle_select"
-                                className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                className="w-full text-gray-700 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                                 value={selectedVehicle}
                                 onChange={handleVehicleChange}
+                                required
                             >
                                 <option value="" disabled>Select a vehicle</option>
                                 {vehicles.length > 0 ? (
@@ -177,6 +212,7 @@ const Payment = () => {
                     </form>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };
