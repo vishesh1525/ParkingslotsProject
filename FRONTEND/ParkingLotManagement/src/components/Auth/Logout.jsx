@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../../store/authSlice.js';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { useSelector } from 'react-redux';
 const Logout = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
