@@ -1,15 +1,26 @@
 import React from 'react'
 import logo from '../../assets/logo.svg'
-
-import { Link } from 'react-router-dom'
-
+import { login } from "../../store/authSlice"
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from "axios"
 const LogIn = () => {
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const handleSubmit = async () => {
+    // const response = await axios.post("", {})
+    // dispatch(login(response.data.data)) adjust the data according to your response
+  }
+
+
+
   return (
     <div className="bg-gray-50 font-[sans-serif]">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full">
-        <a href="javascript:void(0)"><img src={logo} alt="logo" className='w-45 mb-8 mx-auto block rounded-lg' /></a>
-         
+          <a href="javascript:void(0)"><img src={logo} alt="logo" className='w-45 mb-8 mx-auto block rounded-lg' /></a>
+
           <div className="p-8 rounded-2xl bg-white shadow">
             <h2 className="text-gray-800 text-center text-2xl font-bold">Sign in</h2>
             <form className="mt-8 space-y-4">

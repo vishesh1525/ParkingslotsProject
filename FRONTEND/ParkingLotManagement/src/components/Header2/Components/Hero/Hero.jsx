@@ -2,7 +2,7 @@ import './Hero.css';
 import arrow_btn from '../../assets/right-arrow.png';
 import play_icon from '../../assets/play.png';
 import pause_icon from '../../assets/pause-button.png';
-
+// import video from "../../assets/video1.mp4"
 const Hero = ({ heroData, setHeroCount, heroCount, setPlayStatus, playStatus }) => {
     return (
         <div className='hero'>

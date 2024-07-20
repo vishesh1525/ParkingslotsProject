@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import logo from '../../assets/logo.svg';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from "react-redux"
+import { login } from "../../store/authSlice"
 const CustomerForm = () => {
   const [formValues, setFormValues] = useState({
     fname: '',
@@ -13,10 +14,14 @@ const CustomerForm = () => {
     role: 'user', // Default value
     username: '' // New field
   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
+    // const response = await axios.post()
+    // dispatch(login(response.data))
   };
 
   const handleSubmit = (e) => {
@@ -37,80 +42,80 @@ const CustomerForm = () => {
             <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
               <div className="flex gap-4">
                 <div className="flex-1">
-                  <input 
-                    name="fname" 
-                    type="text" 
-                    required 
-                    className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
-                    placeholder="First Name" 
-                    value={formValues.fname} 
+                  <input
+                    name="fname"
+                    type="text"
+                    required
+                    className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                    placeholder="First Name"
+                    value={formValues.fname}
                     onChange={handleChange}
                   />
                 </div>
                 <div className="flex-1">
-                  <input 
-                    name="lname" 
-                    type="text" 
-                    required 
-                    className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
-                    placeholder="Last Name" 
-                    value={formValues.lname} 
+                  <input
+                    name="lname"
+                    type="text"
+                    required
+                    className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                    placeholder="Last Name"
+                    value={formValues.lname}
                     onChange={handleChange}
                   />
                 </div>
               </div>
               <div>
-                <input 
-                  name="email" 
-                  type="email" 
-                  required 
-                  className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
-                  placeholder="Email" 
-                  value={formValues.email} 
+                <input
+                  name="email"
+                  type="email"
+                  required
+                  className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  placeholder="Email"
+                  value={formValues.email}
                   onChange={handleChange}
                 />
               </div>
               <div>
-                <input 
-                  name="password" 
-                  type="password" 
-                  required 
-                  className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
-                  placeholder="Password" 
-                  value={formValues.password} 
+                <input
+                  name="password"
+                  type="password"
+                  required
+                  className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  placeholder="Password"
+                  value={formValues.password}
                   onChange={handleChange}
                 />
               </div>
               <div>
-                <input 
-                  name="username" 
-                  type="text" 
-                  required 
-                  className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
-                  placeholder="Username" 
-                  value={formValues.username} 
+                <input
+                  name="username"
+                  type="text"
+                  required
+                  className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  placeholder="Username"
+                  value={formValues.username}
                   onChange={handleChange}
                 />
               </div>
               <div className="flex gap-4">
                 <div className="flex-1">
-                  <input 
-                    name="ph_no_1" 
-                    type="text" 
-                    required 
-                    className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
-                    placeholder="Phone Number 1" 
-                    value={formValues.ph_no_1} 
+                  <input
+                    name="ph_no_1"
+                    type="text"
+                    required
+                    className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                    placeholder="Phone Number 1"
+                    value={formValues.ph_no_1}
                     onChange={handleChange}
                   />
                 </div>
                 <div className="flex-1">
-                  <input 
-                    name="ph_no_2" 
-                    type="text" 
-                    className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
-                    placeholder="Phone Number 2" 
-                    value={formValues.ph_no_2} 
+                  <input
+                    name="ph_no_2"
+                    type="text"
+                    className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                    placeholder="Phone Number 2"
+                    value={formValues.ph_no_2}
                     onChange={handleChange}
                   />
                 </div>
@@ -126,10 +131,10 @@ const CustomerForm = () => {
                   <option value="admin">Admin</option>
                 </select>
               </div>
-             
+
               <div className="!mt-8">
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
                 >
                   Register
