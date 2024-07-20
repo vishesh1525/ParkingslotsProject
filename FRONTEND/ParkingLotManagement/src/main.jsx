@@ -3,54 +3,27 @@ import React from 'react'
 import App from './App.jsx'
 import './index.css'
 import ReactDOM from 'react-dom/client'
-import { RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
 import Layout from './Layout.jsx'
-// import Home from './components/Home/Home.jsx'
-import About from './components/About/About.jsx'
-import Contact from './components/Contact/Contact.jsx' 
-import Contact from './components/Contact/Contact.jsx'
-import CustomerForm from './components/SmallReusableComponents/CustomerForm.jsx'
-import LogIn from './components/SmallReusableComponents/LogIn.jsx'
-import VehicleForm from './components/SmallReusableComponents/VehicleForm .jsx'
-// import Signup from './components/Signup/Signup.jsx'
+import { About, CustomerForm, Dashboard, LogIn, ParkingView, VehicleForm } from './index.js'
 
-const router =createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        path: "",
-        element: <Header2 />
-      },
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={Layout}>
+      <Route index element={<Dashboard />} />
+      <Route path='login' element={<LogIn />} />
+      {/* <Route path='logout' element={</>} /> */}
+      <Route path='signup' element={<CustomerForm />} />
+      <Route path='about' element={<About />} />
+      <Route path='vehicleRegistration' element={VehicleForm} />
+      <Route path='parkingSpots' element={<ParkingView />} />
 
-      {
-        path: "About",
-        element: <About />
-      },
-      {
-        path: "Contact",
-        element: <Contact />
-      },
-      {
-        path:"Contact",
-        element:<Contact/>
-      }, 
-      {
-        path: "Register2",
-        element: <VehicleForm />
-      },
-      {
-        path: "register",
-        element: <CustomerForm />
-      },
-      {
-        path: "ParkingView",
-        element: <ParkingView />
-      }
-    ]
-  }
-])
+    </Route >
+  )
+)
+
+
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
