@@ -5,21 +5,16 @@ import './index.css'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import Layout from './Layout.jsx'
-import Home from './components/Home/Home.jsx'
+// import Home from './components/Home/Home.jsx'
 import About from './components/About/About.jsx'
+import Contact from './components/Contact/Contact.jsx' 
 import Contact from './components/Contact/Contact.jsx'
 import CustomerForm from './components/SmallReusableComponents/CustomerForm.jsx'
 import LogIn from './components/SmallReusableComponents/LogIn.jsx'
 import VehicleForm from './components/SmallReusableComponents/VehicleForm .jsx'
 // import Signup from './components/Signup/Signup.jsx'
 
-
-import ParkingView from './components/ParkingView/ParkingView.jsx'
-import Header2 from './components/Header2/Header.jsx'
-
-import { Provider } from "react-redux"
-import store from "./store/store.js"
-const router = createBrowserRouter([
+const router =createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
@@ -38,10 +33,9 @@ const router = createBrowserRouter([
         element: <Contact />
       },
       {
-        path: "logIn",
-        element: <LogIn />
-      },
-
+        path:"Contact",
+        element:<Contact/>
+      }, 
       {
         path: "Register2",
         element: <VehicleForm />
@@ -54,12 +48,7 @@ const router = createBrowserRouter([
         path: "ParkingView",
         element: <ParkingView />
       }
-    ],
-
-  },
-  {
-    path: "/Home",
-    element: <Header2 />
+    ]
   }
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
