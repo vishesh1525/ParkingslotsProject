@@ -6,7 +6,7 @@ import Header2 from './components/Header2/Header'
 import Navbar from './components/Header2/Components/Navbar/Navbar'
 function Layout() {
   return (
-    <div className="min-h-screen">
+    <div>
     <Navbar/>
     
     <Outlet/>

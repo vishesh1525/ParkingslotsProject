@@ -6,15 +6,15 @@ import { ApiError } from "../utils/ApiError.js";
 export const createUser = async (req, res) => {
   try {
     // Check if all required fields are provided
-    const { email, password, fullname, username,role } = req.body;
-    if (!email || !password || !fullname || !username ||!role) {
-      return res.status(400).json(new ApiError(400, "All input is required"));
+    const { email, password, firstname,lastname, username,role,phonenos } = req.body;
+    if (!email || !password || !firstname || !username ||!role || !phonenos) {
+      return res.status(400).json("All input are  required");
     }
 
     // Check if the user already exists
     const oldUser = await User.findOne({ email });
     if (oldUser) {
-      return res.status(409).json(new ApiError(409, "User Already Exist. Please Login"));
+      return res.status(409).json( "User Already Exist. Please Login");
     }
 
     // Hash the password
@@ -23,11 +23,13 @@ export const createUser = async (req, res) => {
 
     // Create a new user
     const newUser = new User({
-      fullname,
+      firstname,
       username,
+      lastname,
       email,
       password: hashedPassword,
-      role:role
+      role:role,
+      phonenos:phonenos
     });
 
     // Save the user to the database
@@ -42,15 +44,16 @@ export const createUser = async (req, res) => {
       expires: new Date(Date.now() + 86400000), // Cookie expires in 1 day
       secure: true, // Cookie will only be sent over HTTPS
       httpOnly: true, // Cookie cannot be accessed via client-side scripts
-      sameSite: "None",
     });
-
+    
     console.log("Cookie set successfully");
+    console.log("User is Registred");
+  
 
     // Respond with the new user object
     res.status(201).json(user);
   } catch (error) {
     console.error("Got an error", error);
-    res.status(500).json(new ApiError(500, "Internal Server Error"));
+    res.status(500).json("Internal Server Error");
   }
 };
