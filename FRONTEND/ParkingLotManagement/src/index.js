@@ -7,15 +7,18 @@ import Footer from "./components/Footer/Footer.jsx";
 import Header from "./components/Header/Header.jsx";
 import ParkingView from "./components/ParkingView/ParkingView.jsx";
 import Reservations from "./components/Reservations/Reservations.jsx";
+import VehicleForm from "./components/VehicleForm/VehicleForm .jsx"
 
 export {
-  About,
-  CustomerForm,
-  LogIn,
-  Contact,
-  Dashboard,
-  Footer,
-  Header,
-  ParkingView,
-  Reservations
-};
+    About,
+    CustomerForm,
+    LogIn,
+    Contact,
+    Dashboard,
+    Footer,
+    Header,
+    ParkingView,
+    Reservations,
+    VehicleForm
+  };
+  
