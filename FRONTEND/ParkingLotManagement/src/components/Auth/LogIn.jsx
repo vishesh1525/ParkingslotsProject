@@ -39,14 +39,14 @@ const LogIn = () => {
     } finally {
       setLoading(false);
     }
-  };y4
+  };
 
   return (
     <div className="bg-gray-50 font-[sans-serif]">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full">
           <a href="javascript:void(0)">
-            <img src={logo} alt="logo" className='w-45 mb-8 mx-auto block rounded-lg' />
+            {/* <img src={logo} alt="logo" className='w-45 mb-8 mx-auto block rounded-lg' /> */}
           </a>
 
           <div className="p-8 rounded-2xl bg-white shadow">
