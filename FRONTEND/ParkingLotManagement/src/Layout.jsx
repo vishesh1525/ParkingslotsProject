@@ -1,13 +1,16 @@
 import React from 'react'
 import {Outlet} from 'react-router-dom'
-import Header from './components/Header/Header'
+
 import Footer from './components/Footer/Footer'
+import Header2 from './components/Header2/Header'
+import Navbar from './components/Header2/Components/Navbar/Navbar'
 function Layout() {
   return (
-    <div className="min-h-screen bg-gray-100">
-    <Header/>
+    <div className="min-h-screen">
+    <Navbar/>
+    
     <Outlet/>
-    <Footer/>
+    
     </div>
   )
 }
