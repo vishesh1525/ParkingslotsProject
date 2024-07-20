@@ -37,7 +37,7 @@ const CustomerForm = () => {
         lastname,
         email,
         role,
-        phonenos:phoneno,
+        phonenos: phoneno,
         password,
       }, {
         withCredentials: true,
@@ -46,9 +46,8 @@ const CustomerForm = () => {
         }
       });
 
-      // console.log(response.data);
       dispatch(login(response.data));
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       setError(error.message);
     } finally {
@@ -57,7 +56,7 @@ const CustomerForm = () => {
   };
 
   return (
-    <div className="bg-gray-50 font-[sans-serif]">
+    <div className="bg-gray-50 font-[sans-serif] font-white">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full">
           <a href="javascript:void(0)">
@@ -72,7 +71,7 @@ const CustomerForm = () => {
                     name="fname"
                     type="text"
                     required
-                    className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                    className="w-full text-gray-800 bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                     placeholder="First Name"
                     value={firstname}
                     onChange={(e) => setFirstname(e.target.value)}
@@ -83,7 +82,7 @@ const CustomerForm = () => {
                     name="lname"
                     type="text"
                     required
-                    className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                    className="w-full text-gray-800 bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                     placeholder="Last Name"
                     value={lastname}
                     onChange={(e) => setLastname(e.target.value)}
@@ -95,7 +94,7 @@ const CustomerForm = () => {
                   name="email"
                   type="email"
                   required
-                  className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  className="w-full text-gray-800 bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -106,7 +105,7 @@ const CustomerForm = () => {
                   name="password"
                   type="password"
                   required
-                  className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  className="w-full text-gray-800 bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -117,7 +116,7 @@ const CustomerForm = () => {
                   name="username"
                   type="text"
                   required
-                  className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  className="w-full text-gray-800 bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                   placeholder="Username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
@@ -129,7 +128,7 @@ const CustomerForm = () => {
                     name="ph_no_1"
                     type="text"
                     required
-                    className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                    className="w-full text-gray-800 bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                     placeholder="Phone Number 1"
                     value={phoneno[0]} // Use phoneno array correctly
                     onChange={handleChange}
@@ -139,7 +138,7 @@ const CustomerForm = () => {
                   <input
                     name="ph_no_2"
                     type="text"
-                    className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                    className="w-full text-gray-800 bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                     placeholder="Phone Number 2"
                     value={phoneno[1]} // Use phoneno array correctly
                     onChange={handleChange}
@@ -149,7 +148,7 @@ const CustomerForm = () => {
               <div>
                 <select
                   name="role"
-                  className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  className="w-full text-gray-800 bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
                 >

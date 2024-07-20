@@ -81,7 +81,7 @@ const Payment = () => {
                             <input
                                 id="username"
                                 type="text"
-                                className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 bg-white rounded-md outline-blue-600"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
@@ -92,7 +92,7 @@ const Payment = () => {
                             <input
                                 id="amount"
                                 type="number"
-                                className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600"
                                 value={amount}
                                 onChange={(e) => setAmount(e.target.value)}
                                 required
@@ -102,7 +102,7 @@ const Payment = () => {
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="payment_method">Payment Method</label>
                             <select
                                 id="payment_method"
-                                className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                className="w-full text-gray-800 text-sm border bg-white border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                                 value={paymentMethod}
                                 onChange={handlePaymentMethodChange}
                                 required
@@ -113,11 +113,11 @@ const Payment = () => {
                         </div>
                         {paymentMethod === 'online-payment' && (
                             <div className="mt-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="upi_id">UPI ID</label>
+                                <label className="block text-gray-700 text-sm font-bold  mb-2" htmlFor="upi_id">UPI ID</label>
                                 <input
                                     id="upi_id"
                                     type="text"
-                                    className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                    className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600"
                                     value={upiId}
                                     onChange={(e) => setUpiId(e.target.value)}
                                 />
@@ -127,7 +127,7 @@ const Payment = () => {
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="vehicle_select">Select Vehicle</label>
                             <select
                                 id="vehicle_select"
-                                className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600"
                                 value={selectedVehicle}
                                 onChange={handleVehicleChange}
                             >
