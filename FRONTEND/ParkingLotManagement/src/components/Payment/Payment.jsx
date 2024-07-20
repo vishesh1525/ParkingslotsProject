@@ -53,18 +53,8 @@ const Payment = () => {
         try {
             // Post payment data to the server
             const response = await axios.post('/api/payments', paymentData);
-
-            // Check the response and handle slot status update
-            if (response.status === 200) {
-                // Update slot status on the server
-                await axios.patch(`/api/slots/${selectedSlotId}`, { booked: true });
-
-                // Save booked slot ID to localStorage
-                localStorage.setItem('bookedSlotId', selectedSlotId);
-
-                // Navigate back to ParkingView
-                navigate('/ParkingView');
-            }
+            navigate("payment/success")
+            
         } catch (error) {
             console.error('Payment submission error:', error);
         }

@@ -42,11 +42,11 @@ const LogIn = () => {
   };
 
   return (
-    <div className="bg-white font-[sans-serif] text-gray-800">
+    <div className="bg-white font-[sans-serif] text-black">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full">
           <a href="javascript:void(0)">
-            <img src={logo} alt="logo" className='w-45 mb-8 mx-auto block rounded-lg' />
+            {/* <img src={logo} alt="logo" className='w-45 mb-8 mx-auto block rounded-lg' /> */}
           </a>
 
           <div className="p-8 rounded-2xl bg-white shadow">
@@ -59,7 +59,7 @@ const LogIn = () => {
                     name="email" 
                     type="email" 
                     required 
-                    className="w-full bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                    className="w-full bg-white text-sm border text-white border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                     placeholder="Enter your email"
                     value={email} 
                     onChange={(e) => setEmail(e.target.value)}
@@ -77,7 +77,7 @@ const LogIn = () => {
                     name="password" 
                     type="password" 
                     required 
-                    className="w-full bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                    className="w-full bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 text-black"
                     placeholder="Enter your password"
                     value={password} 
                     onChange={(e) => setPassword(e.target.value)}
@@ -96,7 +96,7 @@ const LogIn = () => {
                     type="checkbox" 
                     className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded custom-checkbox" 
                   />
-                  <label htmlFor="remember-me" className="ml-3 block text-sm text-gray-800">
+                  <label htmlFor="remember-me" className="ml-3 block text-sm text-white">
                     Remember me
                   </label>
                 </div>
@@ -114,13 +114,13 @@ const LogIn = () => {
                   Sign in
                 </button>
               </div>
-              <p className="text-gray-800 text-sm !mt-8 text-center">
+              <p className="text-white text-sm !mt-8 text-center">
                 Don't have an account? 
                 <Link to="/signup" className="text-blue-600 hover:underline ml-1 whitespace-nowrap font-semibold">
                   Register here
                 </Link>
               </p>
-              {loading && <p className="text-gray-800 text-center mt-4">Loading...</p>}
+              {loading && <p className="text-black text-center mt-4">Loading...</p>}
               {error && <p className="text-red-600 text-center mt-4">{error}</p>}
             </form>
           </div>
