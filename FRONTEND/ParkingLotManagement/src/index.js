@@ -1,2 +1,8 @@
 import LogIn from "./components/Auth"
-import 
+
+
+
+
+export {
+    LogIn
+}
