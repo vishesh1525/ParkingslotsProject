@@ -55,7 +55,7 @@ const Header = () => {
           {!authStatus ? (
             <Link to="/login" className="btn">Login</Link>
           ) : (
-            <p>Logout</p>
+            <Link to="/logout" className='btn-ghost'>Logout</Link>
           )}
         </div>
       </div>

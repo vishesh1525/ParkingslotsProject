@@ -31,7 +31,8 @@ const LogIn = () => {
 
       console.log("Login successful", response.data.user);
       dispatch(login(response.data.user));
-      navigate("/dashboard");
+      console.log(response.data.user.role)
+      navigate("/");
     } catch (error) {
       const errorMsg = error.response?.data?.message || "Network error, please try again later.";
       setError(errorMsg);
@@ -42,7 +43,7 @@ const LogIn = () => {
   };
 
   return (
-    <div className="bg-white font-[sans-serif] text-black">
+    <div className="bg-base-300 font-[sans-serif] text-black">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full">
           <a href="javascript:void(0)">
@@ -59,7 +60,7 @@ const LogIn = () => {
                     name="email" 
                     type="email" 
                     required 
-                    className="w-full bg-white text-sm border text-white border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                    className="w-full bg-white text-sm border text-black border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                     placeholder="Enter your email"
                     value={email} 
                     onChange={(e) => setEmail(e.target.value)}
@@ -96,7 +97,7 @@ const LogIn = () => {
                     type="checkbox" 
                     className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded custom-checkbox" 
                   />
-                  <label htmlFor="remember-me" className="ml-3 block text-sm text-white">
+                  <label htmlFor="remember-me" className="ml-3 block text-sm text-black">
                     Remember me
                   </label>
                 </div>
@@ -109,7 +110,7 @@ const LogIn = () => {
               <div className="!mt-8">
                 <button 
                   type="submit" 
-                  className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
+                  className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-black bg-blue-600 hover:bg-blue-700 focus:outline-none"
                 >
                   Sign in
                 </button>

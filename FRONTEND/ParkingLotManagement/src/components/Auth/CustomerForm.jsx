@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import logo from '../../assets/logo.svg';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from "react-redux";
-import { login } from "../../store/authSlice";
+import { useDispatch } from 'react-redux';
+import { login } from '../../store/authSlice';
 
 const CustomerForm = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const CustomerForm = () => {
   const [role, setRole] = useState('');
   const [phoneno, setPhoneno] = useState(['', '']); // Initialize as array
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false); // Initialize loading state
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,7 +29,7 @@ const CustomerForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading state to true when submitting
+    setLoading(true);
     try {
       const response = await axios.post("http://localhost:7000/api/v1/signup", {
         username,
@@ -46,12 +46,14 @@ const CustomerForm = () => {
         }
       });
 
-      dispatch(login(response.data));
+      console.log('Response:', response.data);
+      dispatch(login(response.data.user));
       navigate("/dashboard");
     } catch (error) {
+      console.error('Error:', error);
       setError(error.message);
     } finally {
-      setLoading(false); // Set loading state back to false
+      setLoading(false);
     }
   };
 
@@ -68,7 +70,7 @@ const CustomerForm = () => {
               <div className="flex gap-4">
                 <div className="flex-1">
                   <input
-                    name="fname"
+                    name="firstname"
                     type="text"
                     required
                     className="w-full text-black bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
@@ -79,7 +81,7 @@ const CustomerForm = () => {
                 </div>
                 <div className="flex-1">
                   <input
-                    name="lname"
+                    name="lastname"
                     type="text"
                     required
                     className="w-full text-black bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
@@ -130,7 +132,7 @@ const CustomerForm = () => {
                     required
                     className="w-full text-black bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                     placeholder="Phone Number 1"
-                    value={phoneno[0]} // Use phoneno array correctly
+                    value={phoneno[0]}
                     onChange={handleChange}
                   />
                 </div>
@@ -140,7 +142,7 @@ const CustomerForm = () => {
                     type="text"
                     className="w-full text-black bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                     placeholder="Phone Number 2"
-                    value={phoneno[1]} // Use phoneno array correctly
+                    value={phoneno[1]}
                     onChange={handleChange}
                   />
                 </div>
@@ -152,7 +154,8 @@ const CustomerForm = () => {
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
                 >
-                  <option value="user">User</option>
+                  <option value="">Select Role</option>
+                  <option value="User">User</option>
                   <option value="Admin">Admin</option>
                 </select>
               </div>
@@ -161,11 +164,14 @@ const CustomerForm = () => {
                 <button
                   type="submit"
                   className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-black bg-blue-600 hover:bg-blue-700 focus:outline-none"
+                  className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
+                  disabled={loading}
                 >
-                  Register
+                  {loading ? 'Registering...' : 'Register'}
                 </button>
               </div>
-              <p className="text-gray-800 text-sm !mt-8 text-center">Already have an account? <Link to="/logIn" className="text-blue-600 hover:underline ml-1 whitespace-nowrap font-semibold">Sign in</Link></p>
+              {error && <p className="text-red-500 mt-4">{error}</p>}
+              <p className="text-gray-800 text-sm !mt-8 text-center">Already have an account? <Link to="/login" className="text-blue-600 hover:underline ml-1 whitespace-nowrap font-semibold">Sign in</Link></p>
             </form>
           </div>
         </div>

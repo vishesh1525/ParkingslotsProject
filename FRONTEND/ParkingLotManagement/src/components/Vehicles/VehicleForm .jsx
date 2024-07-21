@@ -1,28 +1,62 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import logo from '../../assets/logo.svg';
+import { useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const VehicleForm = () => {
+  const [username, setUsername] = useState('');
   const [vehicleCount, setVehicleCount] = useState(1);
-  const [vehicles, setVehicles] = useState([{ vehicle_number: '', vehicle_color: '', vehicle_type: '', vehicle_make: '' }]);
+  const [vehicles, setVehicles] = useState([{ license_plate: '', vehicle_type: '', make: '', model: '', color: '' }]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const authStatus = useSelector(state => (state.auth.isAuthenticated));
+  const navigate = useNavigate();
 
   const handleVehicleCountChange = (e) => {
     const count = parseInt(e.target.value);
-    const updatedVehicles = Array(count).fill({ vehicle_number: '', vehicle_color: '', vehicle_type: '', vehicle_make: '' });
+    const updatedVehicles = vehicles.slice(0, count);
+    for (let i = vehicles.length; i < count; i++) {
+      updatedVehicles.push({ license_plate: '', vehicle_type: '', make: '', model: '', color: '' });
+    }
     setVehicleCount(count);
     setVehicles(updatedVehicles);
   };
 
-  const handleVehicleChange = (index, field, value) => {
-    const updatedVehicles = vehicles.map((vehicle, i) => (
-      i === index ? { ...vehicle, [field]: value } : vehicle
-    ));
+  const handleVehicleChange = (index, key, value) => {
+    const updatedVehicles = [...vehicles];
+    updatedVehicles[index][key] = value;
     setVehicles(updatedVehicles);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Vehicle form submitted:', vehicles);
+    setLoading(true);
+    try {
+      const vehicleData = vehicles.map(vehicle => ({ ...vehicle, username }));
+      const response = await axios.post('http://localhost:7000/api/v1/vechile', vehicleData, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log('Vehicle form submitted:', response.data);
+      toast.success('Vehicle details submitted successfully!');
+      // if (authStatus) {
+      //   navigate('/vehicleRegistration');
+      // } else {
+      //   navigate('/login');
+      // }
+    } catch (error) {
+      setError(error.message);
+      console.error('Error submitting vehicle form:', error.response?.data?.message || error.message);
+      toast.error('Error submitting vehicle form: ' + (error.response?.data?.message || error.message));
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -33,6 +67,17 @@ const VehicleForm = () => {
           <div className="p-8 rounded-2xl bg-white shadow">
             <h2 className="text-gray-900 text-center text-2xl font-bold">Vehicle Details</h2>
             <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
+              <div className="mt-4">
+                <input 
+                  name="username" 
+                  type="text" 
+                  required 
+                  className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
+                  placeholder="Enter the user name" 
+                  value={username} 
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
               <div>
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="vehicle_count">Vehicle Count</label>
                 <select 
@@ -51,35 +96,24 @@ const VehicleForm = () => {
                   <h4 className="text-white text-lg font-bold">Vehicle {index + 1}</h4>
                   <div className="mt-2">
                     <input 
-                      name={`username`} 
-                      type="text" 
-                      required 
-                      className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600" 
-                      placeholder="Enter the user name" 
-                      value={vehicle.vehicle_number} 
-                      onChange={(e) => handleVehicleChange(index, 'vehicle_number', e.target.value)}
-                    />
-                  </div>
-                  <div className="mt-2">
-                    <input 
-                      name={`vehicle_number_${index}`} 
+                      name={`license_plate_${index}`} 
                       type="text" 
                       required 
                       className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600" 
                       placeholder="Vehicle Number - KA 05 1992" 
-                      value={vehicle.vehicle_number} 
-                      onChange={(e) => handleVehicleChange(index, 'vehicle_number', e.target.value)}
+                      value={vehicle.license_plate} 
+                      onChange={(e) => handleVehicleChange(index, 'license_plate', e.target.value)}
                     />
                   </div>
                   <div className="mt-2">
                     <input 
-                      name={`vehicle_color_${index}`} 
+                      name={`color_${index}`} 
                       type="text" 
                       required 
                       className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600" 
                       placeholder="Vehicle Color" 
-                      value={vehicle.vehicle_color} 
-                      onChange={(e) => handleVehicleChange(index, 'vehicle_color', e.target.value)}
+                      value={vehicle.color} 
+                      onChange={(e) => handleVehicleChange(index, 'color', e.target.value)}
                     />
                   </div>
                   <div className="mt-2">
@@ -91,33 +125,33 @@ const VehicleForm = () => {
                       onChange={(e) => handleVehicleChange(index, 'vehicle_type', e.target.value)}
                     >
                       <option value="" disabled>Vehicle Type</option>
-                      <option value="car">car</option>
-                      <option value="bike">bike</option>
+                      <option value="car">Car</option>
+                      <option value="bike">Bike</option>
                     </select>
                   </div>
                   <div className="mt-2">
                     <select 
-                      name={`vehicle_make_${index}`} 
+                      name={`make_${index}`} 
                       required 
-                      className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600"
-                      value={vehicle.vehicle_make} 
-                      onChange={(e) => handleVehicleChange(index, 'vehicle_make', e.target.value)}
+                      className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                      value={vehicle.make} 
+                      onChange={(e) => handleVehicleChange(index, 'make', e.target.value)}
                     >
                       <option value="" disabled>Vehicle Make</option>
-                      <option value="petrol">petrol</option>
-                      <option value="diesel">diesel</option>
+                      <option value="petrol">Petrol</option>
+                      <option value="diesel">Diesel</option>
                       <option value="EV">EV</option>
                     </select>
                   </div>
                   <div className="mt-2">
                     <input 
-                      name={`vehicle_model_${index}`} 
+                      name={`model_${index}`} 
                       type="text" 
                       required 
                       className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600" 
                       placeholder="Vehicle Model" 
-                      value={vehicle.vehicle_model} 
-                      onChange={(e) => handleVehicleChange(index, 'vehicle_model', e.target.value)}
+                      value={vehicle.model} 
+                      onChange={(e) => handleVehicleChange(index, 'model', e.target.value)}
                     />
                   </div>
                 </div>
@@ -126,14 +160,17 @@ const VehicleForm = () => {
                 <button 
                   type="submit" 
                   className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
+                  disabled={loading}
                 >
-                  Submit Vehicle Details
+                  {loading ? 'Submitting...' : 'Submit Vehicle Details'}
                 </button>
+                {error && <p className="text-red-500 mt-4">{error}</p>}
               </div>
             </form>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

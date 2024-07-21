@@ -8,22 +8,25 @@ import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import ParkingView from "./components/ParkingView/ParkingView";
 import Reservations from "./components/Reservations/Reservations";
-import VehicleForm from "./components/VehicleForm/VehicleForm ";
-import Payment from "./components/Payment/Payment";
+import VehicleForm from "./components/Vehicles/VehicleForm ";
+import Payment from "./components/Payment/Payment"; 
+// import Payment from "./components/Payment/Payment";
 import AddSlot from "./components/AddSlot/AddSlot";
 import Success from "./components/Payment/Success";
-
+import Logout from "./components/Auth/Logout";
+import ReservationForm from "./components/Vehicles/Reservation";
 
 export {
   About,
   CustomerForm,
   LogIn,
+  Logout,
   Contact,
   Dashboard,
   Footer,
   Header,
   ParkingView,
-  Reservations,
+  ReservationForm,
   VehicleForm,
   Payment,
   AddSlot,

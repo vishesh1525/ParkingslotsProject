@@ -8,7 +8,7 @@ import { Reservation } from "../models/reservation.model.js";
 
  export const CreateReservation=async(req,res)=>{
     try {
-        const {username,spotnumber,vechile_license,end_time}=req.body;
+        const {username,spotnumber,end_time}=req.body;
     const user=await User.findOne({username:username}).select("_id");
     if(!user)
     {
@@ -20,16 +20,12 @@ import { Reservation } from "../models/reservation.model.js";
     {
         return res.status(400).json(new ApiError(200,"Parking Spot is not avaliable "));
     }
-    const vechile_id=await Vehicle.findOne({license_plate:vechile_license}).select("_id");
-    if(!vechile_id)
-    {
-        return res.status(400).json(new ApiError(200,"Vechile is not registred"));
-    }
+    
 
     const reservationdata=new Reservation({
         user_id:user,
         Spot_number:spot_number,
-        vechile_id:vechile_id,
+
         End_time:end_time
     }) 
     const response=await reservationdata.save();
@@ -42,21 +38,23 @@ import { Reservation } from "../models/reservation.model.js";
 
 export const getreservations=async(req,res)=>{
     try {
-        const {username}=req.body;
-        const user=await User.findOne({username:username}).select("_id");
-        if(!user)
-            {
-                 return res.status(400).json(new ApiError(200,"User is not registred"));
-            }
+        const { username } = req.query;
+        if (!username) {
+            return res.status(400).json(new ApiError(400, "Username is required"));
+        }
 
-            const response=await Reservation.find({user_id:user});
-            return res.status(200).json(response);
+        const user = await User.findOne({ username }).select("_id");
+        if (!user) {
+            return res.status(400).json(new ApiError(400, "User is not registered"));
+        }
+
+        const reservations = await Reservation.find({ user_id: user._id });
+        return res.status(200).json(reservations);
     } catch (error) {
         console.error(error);
         return res.status(500).json(new ApiError(500, "Internal Server Error"));
-    
     }
-}
+};
 
 export const getallreservations=async(req,res)=>{
     try {
