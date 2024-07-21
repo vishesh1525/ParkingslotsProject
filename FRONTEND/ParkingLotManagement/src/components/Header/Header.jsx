@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Logout } from "../../index"
 
 const Header = () => {
   const authStatus = useSelector((state) => state.auth.isAuthenticated);
@@ -55,7 +56,7 @@ const Header = () => {
           {!authStatus ? (
             <Link to="/login" className="btn">Login</Link>
           ) : (
-            <Link to="/logout" className='btn-ghost'>Logout</Link>
+            <Logout />
           )}
         </div>
       </div>

@@ -88,7 +88,7 @@ const Payment = () => {
 
         const paymentData = {
             username: user,
-            vehicle_license: selectedVehicle,
+            vechile_license: selectedVehicle,//changed the name as in models earlier there was a spelling mistake 
             reservationspot: spotnumber,
             amount: parseFloat(amount), // Convert amount to number
             method: paymentMethod,

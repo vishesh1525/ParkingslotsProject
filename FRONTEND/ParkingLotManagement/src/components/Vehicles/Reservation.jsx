@@ -55,7 +55,7 @@ const ReservationForm = () => {
   }
 
   return (
-    <div className="flex flex-col items-center p-4">
+    <div className="flex flex-col items-center p-4 h-screen">
       <h1 className="text-3xl font-bold mb-8">Reserve Parking Spot</h1>
       <form className="space-y-4 w-full max-w-md" onSubmit={handleSubmit}>
         <div>
@@ -66,7 +66,7 @@ const ReservationForm = () => {
             id="username"
             name="username"
             type="text"
-            className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+            className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
@@ -81,7 +81,7 @@ const ReservationForm = () => {
             id="spotnumber"
             name="spotnumber"
             type="text"
-            className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+            className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
             value={selectedSpot}
             onChange={(e) => setspots(e.target.value)}
             required
@@ -89,14 +89,14 @@ const ReservationForm = () => {
         </div>
 
         <div>
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="end_time">
+          <label className="block text-white text-sm font-bold mb-2" htmlFor="end_time">
             End Time
           </label>
           <input
             id="end_time"
-            name="end_time"
+            name="end_time "
             type="datetime-local"
-            className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+            className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
             value={endTime}
             onChange={(e) => setEndTime(e.target.value)}
             required
