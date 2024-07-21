@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Logout } from "../../index"
-
+import logo from "../../assets/hlogo.png"
 const Header = () => {
   const authStatus = useSelector((state) => state.auth.isAuthenticated);
   const auth = useSelector((state) => state.auth.user?.role);
@@ -40,7 +40,11 @@ const Header = () => {
               {auth === 'Admin' && <li><Link to="/AddSlot">Add Slot</Link></li>}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost text-xl">daisyUI</Link>
+          <button className='hover:scale-90 hover:bg-base-300'>
+          <img src={logo}
+          className='w-16'
+            alt="" />
+          </button>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
