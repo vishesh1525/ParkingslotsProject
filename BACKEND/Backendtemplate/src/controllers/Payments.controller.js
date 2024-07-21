@@ -67,7 +67,24 @@ export const createPayment = async (req, res) => {
 };
 
 
-
+export const getpayement=async(req,res)=>{
+    try {
+        const {username}=req.body;
+        if(!username)
+        {
+            return res.status(400).json("username not present");
+        }
+        const userid=User.findOne({username:username}).select("_id");
+        const response=PaymentModel.findOne({user_id:userid});
+        if(!response)
+        {
+            return res.status(400).json("response not defined or no payments")
+        }
+        return res.status(200).json(response)
+    } catch (error) {
+        
+    }
+}
 export const getAllPayments = async (req, res) => {
     try {
         const response = await PaymentModel.find();

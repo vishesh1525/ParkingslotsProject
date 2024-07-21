@@ -17,6 +17,7 @@ export const CreateParkingSpot = async (req, res) => {
 
     const parkingSpot = new ParkingSpots({
       user_id: user._id,
+      username:username,
       Spot_number:spot_number,
       floor,
       status
@@ -58,6 +59,36 @@ export const getparkingspotbyspotnumber=async(req,res)=>{
     return res.status(500).json(new ApiError(500, "Internal Server Error"));
   }
 }
+
+export const getParkingSpotBystatus = async (req, res) => {
+  try {
+    // Fetch parking spots with status "Not Available"
+    const parkingSpots = await ParkingSpots.find({});
+
+    if (!parkingSpots.length) {
+      return res.status(400).json("NO PARKING SPOTS");
+    }
+
+    // Extract user IDs from the parking spots
+    
+
+    // Create a map of user IDs to usernames
+   
+
+    // Attach usernames to the parking spots
+    
+
+    return res.status(200).json(parkingSpots);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json(new ApiError(500, "Internal Server Error"));
+  }
+};
+
+
+
+
+
 
 export const deleteParkingspots=async(req,res)=>{
   try {

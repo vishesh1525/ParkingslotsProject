@@ -14,6 +14,9 @@ const ParkingSpotsSchema=new Schema({
             ref: "User"
         }
     ],
+    username:{
+        type:String
+    },
     Spot_number:{
         type:String,
         required:true,
@@ -25,7 +28,7 @@ const ParkingSpotsSchema=new Schema({
     status:{
         type:String,
         default:"Available",
-        enum:["Available","Not  Available"]
+        enum:["Available","Not Available"]
     }
 },{
     timestamps:true
