@@ -114,8 +114,8 @@ const LogIn = () => {
                   Sign in
                 </button>
               </div>
-              <p className="text-white text-sm !mt-8 text-center">
-                Don't have an account? 
+              <p className="text-black text-sm !mt-8 text-center">
+                Don't have an account? {" "} 
                 <Link to="/signup" className="text-blue-600 hover:underline ml-1 whitespace-nowrap font-semibold">
                   Register here
                 </Link>
