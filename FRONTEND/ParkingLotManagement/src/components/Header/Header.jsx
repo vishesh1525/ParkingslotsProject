@@ -6,7 +6,7 @@ import logo from "../../assets/hlogo.png"
 const Header = () => {
   const authStatus = useSelector((state) => state.auth.isAuthenticated);
   const auth = useSelector((state) => state.auth.user?.role);
-
+  console.log(auth)
   return (
     <header>
       <div className="navbar bg-base-300">
@@ -30,20 +30,22 @@ const Header = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow gap-2"
             >
               <li><Link to="/">Dashboard</Link></li>
               <li><Link to="/vehicleRegistration">Register Vehicle</Link></li>
               <li><Link to="/about">About</Link></li>
               <li><Link to="/contact">Contact</Link></li>
               <li><Link to="/parkingSpots">Parking Spots</Link></li>
-              {auth === 'Admin' && <li><Link to="/AddSlot">Add Slot</Link></li>}
+              {auth === 'Admin' && <li><Link to="/AddSlot">Add Slot</Link></li>
+                && <li><Link to="/Adminlogin">Admin Section</Link></li>
+              }
             </ul>
           </div>
           <button className='hover:scale-90 hover:bg-base-300'>
-          <img src={logo}
-          className='w-16'
-            alt="" />
+            <img src={logo}
+              className='w-16'
+              alt="" />
           </button>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -53,12 +55,19 @@ const Header = () => {
             <li><Link to="/about">About</Link></li>
             <li><Link to="/contact">Contact</Link></li>
             <li><Link to="/parkingSpots">Parking Spots</Link></li>
-            {auth === 'Admin' && <li><Link to="/AddSlot">Add Slot</Link></li>}
+            {auth === 'Admin' && (
+              <>
+                <li><Link to="/AddSlot">Add Slot</Link></li>
+                <li><Link to="/Adminlogin">Admin Section</Link></li>
+              </>
+            )}
+
           </ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end mt-8">
           {!authStatus ? (
-            <Link to="/login" className="btn">Login</Link>
+            <Link to="/login" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Login</Link>
+
           ) : (
             <Logout />
           )}

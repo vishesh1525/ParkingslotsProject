@@ -48,7 +48,7 @@ const CustomerForm = () => {
 
       console.log('Response:', response.data);
       dispatch(login(response.data.user));
-      navigate("/dashboard");
+      navigate("/login");
     } catch (error) {
       console.error('Error:', error);
       setError(error.message);

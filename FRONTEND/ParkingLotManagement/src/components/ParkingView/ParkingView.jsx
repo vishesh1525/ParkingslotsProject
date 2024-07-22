@@ -71,13 +71,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { useSelector } from 'react-redux';
 const ParkingView = () => {
   const [parkingSlots, setParkingSlots] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
+  const user = useSelector(state => state.auth.isAuthenticated);
+  console.log(user);
   const handleBookSlot = (id) => {
     setParkingSlots(
       parkingSlots.map(slot => slot.id === id ? { ...slot, booked: !slot.booked } : slot)
@@ -85,7 +86,10 @@ const ParkingView = () => {
     navigate("/parkingSpots/reservation"); // Navigate to the payment page with slot id
   };
 
-
+  if(!user)
+  {
+    navigate("/login")
+  }
 
   useEffect(() => {
     const getParkingSpots = async () => {

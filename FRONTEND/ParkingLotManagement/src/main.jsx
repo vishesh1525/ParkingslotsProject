@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
 import Layout from './Layout.jsx'
-import { About, AddSlot, Contact, CustomerForm, Dashboard, LogIn, ParkingView, Payment, Success, VehicleForm,ReservationForm, Logout } from './index.js'
+import { About, AddSlot, Contact, CustomerForm, Dashboard, LogIn, ParkingView, Payment, Success, VehicleForm,ReservationForm, Logout, Adminsection } from './index.js'
 import { Provider } from "react-redux"
 import store from "./store/store.js"
 import "./index.css"
@@ -20,7 +20,7 @@ const router = createBrowserRouter(
       <Route path='vehicleRegistration' element={<VehicleForm />} />
       <Route path='parkingSpots' element={<ParkingView />} />
       <Route path='/parkingSpots/reservation' element={<ReservationForm />} />
-
+       <Route path='/Adminlogin' element={<Adminsection/>}/>,
       <Route path='payment' element={<Payment />} />
       <Route path='AddSlot' element={<AddSlot />} />
       <Route path='/payment/success' element={Success} />
