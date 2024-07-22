@@ -74,8 +74,8 @@ export const getpayement=async(req,res)=>{
         {
             return res.status(400).json("username not present");
         }
-        const userid=User.findOne({username:username}).select("_id");
-        const response=PaymentModel.findOne({user_id:userid});
+        const userid=await User.findOne({username:username}).select("_id");
+        const response=await PaymentModel.findOne({user_id:userid});
         if(!response)
         {
             return res.status(400).json("response not defined or no payments")

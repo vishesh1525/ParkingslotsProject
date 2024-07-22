@@ -32,7 +32,7 @@ const PaymentSchema = new Schema({
             message: "UPI ID is required for online payments"
         }
     }
-});
+},{timestamps:true});
 
 const PaymentModel = mongoose.model("Payment", PaymentSchema);
 export default PaymentModel;
