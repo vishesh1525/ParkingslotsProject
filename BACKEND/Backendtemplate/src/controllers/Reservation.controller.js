@@ -69,19 +69,28 @@ export const getallreservations=async(req,res)=>{
     }
 }
 
-export const deletereservations=async(req,res)=>{
+export const deletereservations = async (req, res) => {
     try {
-        const { spot_no, username } = req.body;
-        const user = await User.findOne({ username: username }).select("_id");
-        const spot_id = await ParkingSpots.findOne({ Spot_number: spot_no }).select("_id");
-
-        const response = await Reservation.findOneAndDelete({ user_id: user, Spot_number: spot_id });
-        return res.status(200).json(response);
+      const { spot_no } = req.body;
+      const spot = await ParkingSpots.findOne({ Spot_number: spot_no }).select("_id");
+  
+      if (!spot) {
+        return res.status(404).json({ message: "Parking spot not found" });
+      }
+  
+      const response = await Reservation.findOneAndDelete({ Spot_number: spot._id });
+  
+      if (!response) {
+        return res.status(404).json({ message: "Reservation not found" });
+      }
+  
+      return res.status(200).json(response);
     } catch (error) {
-        console.error(error);
-        return res.status(500).json(new ApiError(500, "Internal Server Error"));
+      console.error(error);
+      return res.status(500).json(new ApiError(500, "Internal Server Error"));
     }
-}
+  }
+  
 
 export const updateReservation = async (req, res) => {
     try {

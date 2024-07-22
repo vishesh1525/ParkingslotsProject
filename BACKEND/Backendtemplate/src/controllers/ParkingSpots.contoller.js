@@ -87,6 +87,31 @@ export const getParkingSpotBystatus = async (req, res) => {
 
 
 
+export const updateparkingsport = async (req, res) => {
+  try {
+    const { spot_number } = req.body;
+
+    if (!spot_number) {
+      return res.status(400).json({ message: "Spot number is required" });
+    }
+
+    const updatedSpot = await ParkingSpots.findOneAndUpdate(
+      { Spot_number: spot_number }, // Assuming the field in the model is Spot_number
+      { status: "Available" },
+      { new: true } // This option returns the updated document
+    );
+
+    if (!updatedSpot) {
+      return res.status(404).json({ message: "Parking spot not found" });
+    }
+
+    return res.status(200).json({ message: "Parking spot updated successfully", updatedSpot });
+  } catch (error) {
+    console.error('Error updating parking spot:', error);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
 
 
 

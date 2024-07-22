@@ -1,6 +1,6 @@
 import {Contact} from "../models/Contact.models.js"
 
-const createcontact=async(req,res)=>{
+export const createcontact=async(req,res)=>{
     try {
         const{firstname,lastname,email,phone,message}=req.body;
         if(!firstname || !lastname || !email || !phone || !message)
@@ -15,7 +15,7 @@ const createcontact=async(req,res)=>{
             message
         })
         const response=await conatctdata.save();
-        return res.staus(201).json(response)
+        return res.status(201).json(response)
     } catch (error) {
         console.error('Error in createContact:', error);
         return res.status(500).json({ message: "Internal Server Error" });

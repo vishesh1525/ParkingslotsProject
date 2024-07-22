@@ -20,10 +20,12 @@ import Vechileroutes from "./routes/Vechile.routes.js"
 import Parkingspotroutes from "./routes/Parkingspots.routes.js"
 import Reservationroutes from "./routes/Reservation.routes.js"
 import PaymentModelroutes from "./routes/Payment.routes.js"
+import Conatctroutes from "./routes/Contact.routes.js"
 app.use("/api/v1/healthcheck",healthcheckRouter)
 app.use("/api/v1",loginroutes)
 app.use("/api/v1",Vechileroutes)
 app.use("/api/v1",Parkingspotroutes)
 app.use("/api/v1",Reservationroutes)
 app.use("/api/v1",PaymentModelroutes)
+app.use("/api/v1",Conatctroutes)
 export {app}

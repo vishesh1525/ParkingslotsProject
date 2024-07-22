@@ -16,7 +16,6 @@ const ContactSchema = new Schema({
   phone: {
     type: String,
     required: true,
-    unique: true,
     match: [/^\d{10}$/, 'Please fill a valid phone number'], // Example for 10 digits
   },
   message: {
@@ -25,6 +24,6 @@ const ContactSchema = new Schema({
   }
 });
 
-const Contact = mongoose.model('Contact', ContactSchema);
+export const Contact = mongoose.model('Contact', ContactSchema);
 
-export default Contact;
+
