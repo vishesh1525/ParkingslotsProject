@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import paymentsucess from "../../assets/paymetSuccess.gif"
+import { TiTick } from "react-icons/ti";
+import { FaRupeeSign } from "react-icons/fa";
 import { useSelector } from "react-redux"
 const Success = () => {
     const [loading, setLoading] = useState(true);
@@ -86,13 +89,23 @@ const Success = () => {
                                 <p className='text-gray-500 text-xs'>Reference Number</p>
                                 <p className='text-black font-bold'>{paymentInfo._id}</p>
                             </div>
-                            <div id="amount" className='flex flex-row justify-between'>
-                                <p className='text-gray-500 text-xs'>Amount</p>
-                                <div className='flex flex-row items-center justify-center gap-2 text-black font-bold'>
-                                    <span><FaRupeeSign /></span>
-                                    <p>{cost}</p>
+                            <div id="amount">
+                        <div className='bg-white p-5 h-32 lg:w-[500px] w-screen flex items-center justify-between rounded-lg'>
+                            <div id='amountInfo' className=''>
+                                <div className='flex flex-row items-center justify-center gap-2'>
+                                    <p className='text-3xl font-bold text-black font-rubik'><FaRupeeSign /></p>
+                                    <h1 className='text-3xl font-bold text-black font-rubik'>{cost}</h1>
                                 </div>
+                                <p className='text-gray-500 text-xs'>Payment Success...!</p>
                             </div>
+                            <div id='successGif'>
+                                <img
+                                    className='w-28'
+                                    src={paymentsucess}
+                                    alt="Success GIF" />
+                            </div>
+                        </div>
+                    </div>
                             <div id="paymentMethod" className='flex flex-row justify-between'>
                                 <p className='text-gray-500 text-xs'>Payment Method</p>
                                 <p className='text-black text-xs font-bold'>{paymentInfo.paymentMethod}</p>

@@ -23,7 +23,7 @@ const router = createBrowserRouter(
        <Route path='/Adminlogin' element={<Adminsection/>}/>,
       <Route path='payment' element={<Payment />} />
       <Route path='AddSlot' element={<AddSlot />} />
-      <Route path='/payment/success' element={Success} />
+      <Route path='/payment/success' element={<Success/>} />
     </Route>
   )
 )
