@@ -12,7 +12,7 @@ import VehicleForm from "./components/Vehicles/VehicleForm ";
 import Payment from "./components/Payment/Payment"; 
 // import Payment from "./components/Payment/Payment";
 import AddSlot from "./components/AddSlot/AddSlot";
-import Success from "./components/Payment/Success";
+import Success from "./components/Payment/Payment";
 import Logout from "./components/Auth/Logout";
 import ReservationForm from "./components/Vehicles/Reservation";
 import Adminsection from "./components/Adminsection/Adminsection";

@@ -99,7 +99,7 @@ const Payment = () => {
         try {
             await axios.post('http://localhost:7000/api/v1/Payment', paymentData);
             toast.success("Payment done");
-            navigate('/');
+            navigate('/payment/success');
         } catch (error) {
             console.error('Payment submission error:', error.message);
             toast.error("Payment failure");

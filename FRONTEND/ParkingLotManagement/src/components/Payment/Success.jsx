@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-
+import { useSelector } from "react-redux"
 const Success = () => {
     const [loading, setLoading] = useState(true);
     const [paymentInfo, setPaymentInfo] = useState({});
     const [error, setError] = useState(null)
     const [cost, setCost] = useState('');
     const navigate = useNavigate();
-
+    const username = useSelector((state) => state.auth.user.username)
     useEffect(() => {
         const getPaymentInfo = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/v1/payment/paymentInfo", {
+                const response = await axios.post("http://localhost:7000/api/v1/Payements", {
+                    username
+                }, {
                     withCredentials: true
                 });
                 // console.log("the payment info is : ",response.data.data.payment.cost)
                 // console.log("the cost info is : ",response.data.data.cost)
-                setPaymentInfo(response.data.data.payment);
-                setCost(response.data.data.payment.cost)
+                setPaymentInfo(response.data);
+                setCost(response.data.amount)
             } catch (error) {
                 console.error("Error fetching payment info:", error);
                 setError(error.message)
@@ -78,7 +80,7 @@ const Success = () => {
                             </div>
                             <div id="allocatedRoom" className='flex flex-row justify-between'>
                                 <p className='text-gray-500 text-xs'>Allocated Room</p>
-                                <p className='text-black font-bold'>{paymentInfo.roomId}</p>
+                                <p className='text-black font-bold'>{paymentInfo.reservation_id}</p>
                             </div>
                             <div id="refNo" className='flex flex-row justify-between'>
                                 <p className='text-gray-500 text-xs'>Reference Number</p>
@@ -93,7 +95,11 @@ const Success = () => {
                             </div>
                             <div id="paymentMethod" className='flex flex-row justify-between'>
                                 <p className='text-gray-500 text-xs'>Payment Method</p>
-                                <p className='text-black text-xs font-bold'>{paymentInfo.cardType}</p>
+                                <p className='text-black text-xs font-bold'>{paymentInfo.paymentMethod}</p>
+                            </div>
+                            <div id="Vechile" className='flex flex-row justify-between'>
+                                <p className='text-gray-500 text-xs'>Vechile License</p>
+                                <p className='text-black text-xs font-bold'>{paymentInfo.vechile_license}</p>
                             </div>
                             <div id="paymentStatus" className='flex flex-row justify-between'>
                                 <p className='text-gray-500 text-xs'>Payment Status</p>
