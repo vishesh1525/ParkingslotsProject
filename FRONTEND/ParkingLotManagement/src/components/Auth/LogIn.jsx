@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/log3.svg';
 import { login } from "../../store/authSlice";
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -34,7 +34,7 @@ const LogIn = () => {
       console.log(response.data.user.role)
       navigate("/");
     } catch (error) {
-      const errorMsg = error.response?.data?.message || "Network error, please try again later.";
+      const errorMsg = error.response?.data || "Network error, please try again later.";
       setError(errorMsg);
       console.error("Error signing in:", errorMsg);
     } finally {
@@ -44,11 +44,13 @@ const LogIn = () => {
 
   return (
     <div className="bg-base-300 font-[sans-serif] text-black">
+      
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
+      {/* <a href="javascript:void(0)">
+            <img src={logo} alt="logo" className='w-30 mb-4 mx-6 block rounded-sm' />
+          </a> */}
         <div className="max-w-md w-full">
-          <a href="javascript:void(0)">
-            {/* <img src={logo} alt="logo" className='w-45 mb-8 mx-auto block rounded-lg' /> */}
-          </a>
+          
 
           <div className="p-8 rounded-2xl bg-white shadow">
             <h2 className="text-center text-2xl font-bold">Sign in</h2>

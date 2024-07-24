@@ -53,7 +53,7 @@ const Payment = () => {
     useEffect(() => {
         const getAllVehicles = async () => {
             try {
-                const response = await axios.get('http://localhost:7000/api/v1/vechile', {
+                const response = await axios.post('http://localhost:7000/api/v1/vechiles', {username:user},{
                     withCredentials: true,
                 });
 
