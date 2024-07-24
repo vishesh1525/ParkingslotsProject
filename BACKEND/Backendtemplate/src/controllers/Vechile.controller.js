@@ -7,7 +7,15 @@ import { ApiError } from "../utils/ApiError.js";
 dotenv.config();
 export const getVechiles = async (req, res) => {
     try {
-        const response = await Vehicle.find();
+        const {username}=req.body;
+        const userid=await User.findOne({username:username}).select("_id");
+        if (!userid) {
+          console.log("User not found");
+          return res.status(400).json("User not found");
+        }
+    
+        console.log(userid)
+        const response = await Vehicle.find({user_id:userid});
         if (response.length === 0) {
             console.log("Vehicles are not registered");
             return res.status(400).json(new ApiError(400, "No vehicles registered"));

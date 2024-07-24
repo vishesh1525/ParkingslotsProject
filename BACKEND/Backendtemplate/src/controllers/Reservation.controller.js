@@ -73,7 +73,7 @@ export const deletereservations = async (req, res) => {
     try {
       const { spot_no } = req.body;
       const spot = await ParkingSpots.findOne({ Spot_number: spot_no }).select("_id");
-  
+     
       if (!spot) {
         return res.status(404).json({ message: "Parking spot not found" });
       }
