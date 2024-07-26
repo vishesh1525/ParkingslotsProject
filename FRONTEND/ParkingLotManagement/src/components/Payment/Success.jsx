@@ -21,6 +21,7 @@ const Success = () => {
                     withCredentials: true
                 });
                 // console.log("the payment info is : ",response.data.data.payment.cost)
+                console.log("the payment data is :    ", response)
                 // console.log("the cost info is : ",response.data.data.cost)
                 setPaymentInfo(response.data);
                 setCost(response.data.amount)
@@ -51,26 +52,37 @@ const Success = () => {
     return (
         <section className='h-screen lg:ml-16 ml-1 mt-20 bg-slate-100 overflow-x-hidden mb-20'>
             <div id='mainDiv' className='flex lg:flex-row flex-col-reverse lg:gap-0 gap-10 '>
-                <div id="left" className='flex flex-col lg:w-1/2 w-screen ml-4'>
+                <div id="left" className='flex flex-col lg:w-1/2 w-screen ml-4 mt-20'>
                     <div className="heading ml-4">
                         <h1 className='text-3xl text-black font-bold font-rubik'>Booking confirmed </h1>
                         <h1 className='text-3xl text-black font-bold mt-1 font-rubik'>Successfully!</h1>
                     </div>
                     <div className="para lg:w-2/3 w-4/5 mt-4 text-gray-700">
-                        <p>Thank you for choosing The Sapphire's Retreat! Your reservation is confirmed. If there's anything you need before your arrival, please don't hesitate to reach out to your host.</p>
+                        <p>Thank you for choosing Book My Spot! Your reservation is confirmed. If there's anything you need before your arrival, please don't hesitate to reach out to your host.</p>
                     </div>
                     <div className='navigate'>
                         <Link to={"/dashboard"} className='text-[15px] underline font-rubik mt-5 text-black text-center'>Go back to home</Link>
                     </div>
                 </div>
-                <div id="rights" className='lg:w-1/2 lg:mr-10 flex gap-5 flex-col'>
+                <div id="rights" className='lg:w-1/2 lg:mr-10 flex gap-5 flex-col mt-20'>
                     <div id="amount">
                         <div className='bg-white p-5 h-32 lg:w-[500px] w-screen flex items-center justify-between rounded-lg'>
-                            <div id='amountInfo' className=''>
-                                <div className='flex flex-row items-center justify-center gap-2'>
-                                    <h1 className='text-3xl font-bold text-black font-rubik'>{cost}</h1>
+                            <div id="amount">
+                                <div className='bg-white p-5 h-32 lg:w-[500px] w-screen flex items-center justify-between rounded-lg'>
+                                    <div id='amountInfo' className=''>
+                                        <div className='flex flex-row items-center justify-center gap-2'>
+                                            <p className='text-3xl font-bold text-black font-rubik'><FaRupeeSign /></p>
+                                            <h1 className='text-3xl font-bold text-black font-rubik'>{cost}</h1>
+                                        </div>
+                                        <p className='text-gray-500 text-xs'>Payment Success...!</p>
+                                    </div>
+                                    <div id='successGif'>
+                                        <img
+                                            className='w-28'
+                                            src={paymentsucess}
+                                            alt="Success GIF" />
+                                    </div>
                                 </div>
-                                <p className='text-gray-500 text-xs'>Payment Success...!</p>
                             </div>
                         </div>
                     </div>
@@ -82,30 +94,14 @@ const Success = () => {
                                 <p className='text-black font-bold'>{paymentInfo.createdAt}</p>
                             </div>
                             <div id="allocatedRoom" className='flex flex-row justify-between'>
-                                <p className='text-gray-500 text-xs'>Allocated Room</p>
+                                <p className='text-gray-500 text-xs'>Allocated Spot</p>
                                 <p className='text-black font-bold'>{paymentInfo.reservation_id}</p>
                             </div>
                             <div id="refNo" className='flex flex-row justify-between'>
                                 <p className='text-gray-500 text-xs'>Reference Number</p>
                                 <p className='text-black font-bold'>{paymentInfo._id}</p>
                             </div>
-                            <div id="amount">
-                        <div className='bg-white p-5 h-32 lg:w-[500px] w-screen flex items-center justify-between rounded-lg'>
-                            <div id='amountInfo' className=''>
-                                <div className='flex flex-row items-center justify-center gap-2'>
-                                    <p className='text-3xl font-bold text-black font-rubik'><FaRupeeSign /></p>
-                                    <h1 className='text-3xl font-bold text-black font-rubik'>{cost}</h1>
-                                </div>
-                                <p className='text-gray-500 text-xs'>Payment Success...!</p>
-                            </div>
-                            <div id='successGif'>
-                                <img
-                                    className='w-28'
-                                    src={paymentsucess}
-                                    alt="Success GIF" />
-                            </div>
-                        </div>
-                    </div>
+
                             <div id="paymentMethod" className='flex flex-row justify-between'>
                                 <p className='text-gray-500 text-xs'>Payment Method</p>
                                 <p className='text-black text-xs font-bold'>{paymentInfo.paymentMethod}</p>

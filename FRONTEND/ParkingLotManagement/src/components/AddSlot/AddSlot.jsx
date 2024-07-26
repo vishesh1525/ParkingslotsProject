@@ -34,7 +34,8 @@ const AddSlot = () => {
       const response = await axios.post('http://localhost:7000/api/v1/ParkingSpots', slotData);
       toast.success("Parking spot created sucesfully")
       // Handle successful response
-      setMessage(`Slot added successfully: ${JSON.stringify(response.data.spotNumber)}`);
+      console.log(response.data.Spot_number)
+      setMessage(`Slot added successfully: ${JSON.stringify(response.data.Spot_number)}`);
     } catch (error) {
       // Handle errors
       toast.error('Error submitting vehicle form: ' + (error.response?.data?.message || error.message));

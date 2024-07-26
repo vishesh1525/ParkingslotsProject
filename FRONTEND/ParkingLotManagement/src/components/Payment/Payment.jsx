@@ -48,7 +48,7 @@ const Payment = () => {
         };
 
         getReservations();
-    }, [user]);
+    }, []);
 
     useEffect(() => {
         const getAllVehicles = async () => {

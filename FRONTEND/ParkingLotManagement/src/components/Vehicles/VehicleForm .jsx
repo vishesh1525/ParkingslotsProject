@@ -67,7 +67,7 @@ const VehicleForm = () => {
 
   return (
     <div 
-      className="bg-purple-100 font-[sans-serif] min-h-screen flex flex-col items-center justify-center py-6 px-4"
+      className="font-[sans-serif] min-h-screen flex flex-col items-center justify-center py-6 px-4"
       style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
       <div className="max-w-md w-full bg-transparent backdrop-blur-lg p-8 rounded-2xl shadow-lg">
