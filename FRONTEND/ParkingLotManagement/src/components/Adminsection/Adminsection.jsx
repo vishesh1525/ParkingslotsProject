@@ -73,6 +73,35 @@ export default function Adminsection() {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      await axios.delete(
+        "http://localhost:7000/api/v1/ParkingSpots",
+        {
+          data: { spot_number: spotNumber },
+          withCredentials: true
+        }
+      );
+      toast.success("Parking spot deleted successfully");
+      setSpotNumber('');
+
+      const fetchData = async () => {
+        try {
+          const response = await axios.get("http://localhost:7000/api/v1/parkingSpotbystatus", { withCredentials: true });
+          const data = response.data.map(spot => createData(spot.Spot_number, spot.floor, spot.status, spot.username));
+          setParkingData(data);
+        } catch (error) {
+          toast.error("Error while fetching the data");
+          console.error('Error fetching parking spots:', error.message);
+        }
+      };
+      fetchData();
+    } catch (error) {
+      toast.error("Error deleting parking spot");
+      console.error('Error deleting parking spot:', error.message);
+    }
+  };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -136,7 +165,10 @@ export default function Adminsection() {
           placeholder="Enter Spot Number"
           className="mb-4 w-full px-4 py-2 text-white border border-gray-300 rounded-md bg-gray-700"
         />
-        <button onClick={handleUpdate} className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition">Update Spot</button>
+        <div className="flex space-x-4">
+          <button onClick={handleUpdate} className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition">Update Spot</button>
+          <button onClick={handleDelete} className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition">Delete Spot</button>
+        </div>
       </div>
       <ToastContainer />
     </section>
