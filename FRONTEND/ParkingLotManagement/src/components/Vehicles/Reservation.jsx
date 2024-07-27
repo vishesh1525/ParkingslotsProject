@@ -3,28 +3,33 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom";
 
 const ReservationForm = () => {
   const [username, setUsername] = useState('');
-  const [selectedSpot, setspots] = useState('');
+  const [selectedSpot, setSelectedSpot] = useState('');
   const [endTime, setEndTime] = useState('');
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [loading, setloading] = useState(null);
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { spotNumber } = useParams(); // Get spot number from URL
 
   const usernameFromStore = useSelector((state) => state.auth.user?.username);
+
   useEffect(() => {
     if (usernameFromStore) {
       setUsername(usernameFromStore);
     }
-  }, [usernameFromStore]);
-
+    if (spotNumber) {
+      setSelectedSpot(spotNumber);
+    }
+  }, [usernameFromStore, spotNumber]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSuccess(null); // Reset success message
+    setLoading(true);
     try {
       const reservation = {
         username,
@@ -35,14 +40,15 @@ const ReservationForm = () => {
         withCredentials: true
       });
       setSuccess("Reservation successfully made!");
-      toast.success("Sucesfully created reservation")
+      toast.success("Successfully created reservation");
       console.log('Reservation successful:', response.data);
-      navigate("/payment")
-
+      navigate(`/payment/${selectedSpot}`);
     } catch (error) {
-      toast.error("Error", error)
+      toast.error("Error making reservation");
       console.error('Error making reservation:', error.message);
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -55,48 +61,46 @@ const ReservationForm = () => {
   }
 
   return (
-    <div className="flex flex-col items-center p-4 h-screen">
-      <h1 className="text-3xl font-bold mb-8">Reserve Parking Spot</h1>
+    <div className="flex flex-col items-center p-4 h-screen bg-gray-800">
+      <h1 className="text-3xl font-bold mb-8 text-white">Reserve Parking Spot</h1>
       <form className="space-y-4 w-full max-w-md" onSubmit={handleSubmit}>
         <div>
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+          <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="username">
             Username
           </label>
           <input
             id="username"
             name="username"
             type="text"
-            className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+            className="w-full text-gray-700 text-sm border border-gray-300 px-4 py-3 rounded-md"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
+            readOnly
           />
         </div>
 
         <div>
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="vehicle_license">
+          <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="spotnumber">
             Spot Number
           </label>
           <input
             id="spotnumber"
             name="spotnumber"
             type="text"
-            className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+            className="w-full text-gray-700 text-sm border border-gray-300 px-4 py-3 rounded-md"
             value={selectedSpot}
-            onChange={(e) => setspots(e.target.value)}
-            required
+            readOnly
           />
         </div>
 
         <div>
-          <label className="block text-white text-sm font-bold mb-2" htmlFor="end_time">
+          <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="end_time">
             End Time
           </label>
           <input
             id="end_time"
-            name="end_time "
+            name="end_time"
             type="datetime-local"
-            className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+            className="w-full text-gray-700 text-sm border border-gray-300 px-4 py-3 rounded-md"
             value={endTime}
             onChange={(e) => setEndTime(e.target.value)}
             required
@@ -112,6 +116,7 @@ const ReservationForm = () => {
         </div>
         {success && <div className="text-green-600 mt-4">{success}</div>}
       </form>
+      <ToastContainer />
     </div>
   );
 };

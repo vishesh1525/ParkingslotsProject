@@ -58,14 +58,14 @@ const CustomerForm = () => {
   };
 
   return (
-    <div className="bg-gray-50 font-[sans-serif] font-white">
+    <div className="bg-gray-800 min-h-screen ">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full">
           <a href="javascript:void(0)">
             {/* <img src={logo} alt="logo" className='w-45 mb-8 mx-auto block rounded-lg' /> */}
           </a>
-          <div className="p-8 rounded-2xl bg-white shadow">
-            <h2 className="text-black text-center text-2xl font-bold">Register</h2>
+          <div className="p-8 rounded-2xl bg-white shadow-lg">
+            <h2 className="text-gray-800 text-center text-2xl font-bold">Register</h2>
             <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
               <div className="flex gap-4">
                 <div className="flex-1">
@@ -73,7 +73,7 @@ const CustomerForm = () => {
                     name="firstname"
                     type="text"
                     required
-                    className="w-full text-black bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                    className="w-full text-gray-900 bg-gray-100 text-sm border border-gray-300 px-4 py-3 rounded-md placeholder-gray-600 focus:border-blue-500 focus:ring-blue-500"
                     placeholder="First Name"
                     value={firstname}
                     onChange={(e) => setFirstname(e.target.value)}
@@ -84,7 +84,7 @@ const CustomerForm = () => {
                     name="lastname"
                     type="text"
                     required
-                    className="w-full text-black bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                    className="w-full text-gray-900 bg-gray-100 text-sm border border-gray-300 px-4 py-3 rounded-md placeholder-gray-600 focus:border-blue-500 focus:ring-blue-500"
                     placeholder="Last Name"
                     value={lastname}
                     onChange={(e) => setLastname(e.target.value)}
@@ -96,7 +96,7 @@ const CustomerForm = () => {
                   name="email"
                   type="email"
                   required
-                  className="w-full text-black bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  className="w-full text-gray-900 bg-gray-100 text-sm border border-gray-300 px-4 py-3 rounded-md placeholder-gray-600 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -107,7 +107,7 @@ const CustomerForm = () => {
                   name="password"
                   type="password"
                   required
-                  className="w-full text-black bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  className="w-full text-gray-900 bg-gray-100 text-sm border border-gray-300 px-4 py-3 rounded-md placeholder-gray-600 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -118,7 +118,7 @@ const CustomerForm = () => {
                   name="username"
                   type="text"
                   required
-                  className="w-full text-black bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  className="w-full text-gray-900 bg-gray-100 text-sm border border-gray-300 px-4 py-3 rounded-md placeholder-gray-600 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
@@ -130,7 +130,7 @@ const CustomerForm = () => {
                     name="ph_no_1"
                     type="text"
                     required
-                    className="w-full text-black bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                    className="w-full text-gray-900 bg-gray-100 text-sm border border-gray-300 px-4 py-3 rounded-md placeholder-gray-600 focus:border-blue-500 focus:ring-blue-500"
                     placeholder="Phone Number 1"
                     value={phoneno[0]}
                     onChange={handleChange}
@@ -140,7 +140,7 @@ const CustomerForm = () => {
                   <input
                     name="ph_no_2"
                     type="text"
-                    className="w-full text-black bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                    className="w-full text-gray-900 bg-gray-100 text-sm border border-gray-300 px-4 py-3 rounded-md placeholder-gray-600 focus:border-blue-500 focus:ring-blue-500"
                     placeholder="Phone Number 2"
                     value={phoneno[1]}
                     onChange={handleChange}
@@ -150,7 +150,7 @@ const CustomerForm = () => {
               <div>
                 <select
                   name="role"
-                  className="w-full text-black bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  className="w-full text-gray-900 bg-gray-100 text-sm border border-gray-300 px-4 py-3 rounded-md placeholder-gray-600 focus:border-blue-500 focus:ring-blue-500"
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
                 >
@@ -163,7 +163,7 @@ const CustomerForm = () => {
               <div className="!mt-8">
                 <button
                   type="submit"
-                  className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-black bg-blue-600 hover:bg-blue-700 focus:outline-none"
+                  className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
                   disabled={loading}
                 >
                   {loading ? 'Registering...' : 'Register'}

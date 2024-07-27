@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
@@ -12,13 +12,22 @@ const VehicleForm = () => {
   const [vehicles, setVehicles] = useState([{ license_plate: '', vehicle_type: '', make: '', model: '', color: '' }]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  const authStatus = useSelector(state => (state.auth.isAuthenticated));
-  console.log(authStatus)
+  const authStatus = useSelector(state => state.auth.isAuthenticated);
   const navigate = useNavigate();
-  if (!authStatus) {
-    navigate('/login');
-      } 
+
+  useEffect(() => {
+    if (!authStatus) {
+      navigate('/login');
+    }
+  }, [authStatus, navigate]);
+
+  const usernameFromStore = useSelector((state) => state.auth.user?.username);
+  useEffect(() => {
+    if (usernameFromStore) {
+      setUsername(usernameFromStore);
+    }
+  }, [usernameFromStore]);
+
   const handleVehicleCountChange = (e) => {
     const count = parseInt(e.target.value);
     const updatedVehicles = vehicles.slice(0, count);
@@ -47,15 +56,13 @@ const VehicleForm = () => {
         }
       });
       console.log('Vehicle form submitted:', response.data);
-      toast.success('Vehicle details submitted successfully!',{
+      toast.success('Vehicle details submitted successfully!', {
         onClose: () => {
-          
           setTimeout(() => {
             navigate('/dashboard');
           }, 900);
         }
       });
-      
     } catch (error) {
       setError(error.message);
       console.error('Error submitting vehicle form:', error.response?.data?.message || error.message);
@@ -67,28 +74,30 @@ const VehicleForm = () => {
 
   return (
     <div 
-      className="font-[sans-serif] min-h-screen flex flex-col items-center justify-center py-6 px-4"
-      style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      className="flex flex-col items-center p-4 h-screen" 
     >
       <div className="max-w-md w-full bg-transparent backdrop-blur-lg p-8 rounded-2xl shadow-lg">
-        <h2 className="text-black text-center text-2xl font-bold">Vehicle Details</h2>
+        <h2 className="text-white text-center text-2xl font-bold">Vehicle Details</h2>
         <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
-          <div className="mt-4">
-            <input 
-              name="username" 
-              type="text" 
-              required 
-              className="w-full bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
-              placeholder="Enter the user name" 
-              value={username} 
-              onChange={(e) => setUsername(e.target.value)}
+          <div>
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+              Username
+            </label>
+            <input
+              id="userName"
+              type="text"
+              readOnly
+              value={username}
+              className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
             />
           </div>
           <div>
-            <label className="block text-black text-sm font-bold mb-2" htmlFor="vehicle_count">Vehicle Count</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="vehicle_count">
+              Vehicle Count
+            </label>
             <select 
               name="vehicle_count" 
-              className="w-full text-black text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600"
+              className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
               value={vehicleCount}
               onChange={handleVehicleCountChange}
             >
@@ -99,14 +108,14 @@ const VehicleForm = () => {
           </div>
           {vehicles.map((vehicle, index) => (
             <div key={index} className="mt-4">
-              <h4 className="text-black text-lg font-bold">Vehicle {index + 1}</h4>
+              <h4 className="text-white text-lg font-bold">Vehicle {index + 1}</h4>
               <div className="mt-2">
                 <input 
                   name={`license_plate_${index}`} 
                   type="text" 
                   required 
-                  className="w-full text-black text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600" 
-                  placeholder="Vehicle Number - KA 05 1992" 
+                  className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
+                  placeholder="Vehicle Number (ex) - KA 05 1992" 
                   value={vehicle.license_plate} 
                   onChange={(e) => handleVehicleChange(index, 'license_plate', e.target.value)}
                 />
@@ -116,7 +125,7 @@ const VehicleForm = () => {
                   name={`color_${index}`} 
                   type="text" 
                   required 
-                  className="w-full text-black text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600" 
+                  className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
                   placeholder="Vehicle Color" 
                   value={vehicle.color} 
                   onChange={(e) => handleVehicleChange(index, 'color', e.target.value)}
@@ -126,7 +135,7 @@ const VehicleForm = () => {
                 <select 
                   name={`vehicle_type_${index}`} 
                   required 
-                  className="w-full text-black text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600"
+                  className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                   value={vehicle.vehicle_type} 
                   onChange={(e) => handleVehicleChange(index, 'vehicle_type', e.target.value)}
                 >
@@ -139,7 +148,7 @@ const VehicleForm = () => {
                 <select 
                   name={`make_${index}`} 
                   required 
-                  className="w-full text-black bg-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
                   value={vehicle.make} 
                   onChange={(e) => handleVehicleChange(index, 'make', e.target.value)}
                 >
@@ -154,7 +163,7 @@ const VehicleForm = () => {
                   name={`model_${index}`} 
                   type="text" 
                   required 
-                  className="w-full text-black text-sm border border-gray-300 px-4 py-3 rounded-md bg-white outline-blue-600" 
+                  className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
                   placeholder="Vehicle Model" 
                   value={vehicle.model} 
                   onChange={(e) => handleVehicleChange(index, 'model', e.target.value)}

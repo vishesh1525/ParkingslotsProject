@@ -44,20 +44,17 @@ export default function Adminsection() {
 
   const handleUpdate = async () => {
     try {
-
       await axios.patch(
         "http://localhost:7000/api/v1/ParkingSpots",
         { spot_number: spotNumber },
         { withCredentials: true }
       );
-      const response = await axios.delete("http://localhost:7000/api/v1/Reservation", {
+      await axios.delete("http://localhost:7000/api/v1/Reservation", {
         data: { spot_no: spotNumber },
         withCredentials: true
       });
-      console.log(response);
       toast.success("Parking spot data cleared");
       setSpotNumber('');
-
 
       const fetchData = async () => {
         try {
@@ -86,8 +83,8 @@ export default function Adminsection() {
   };
 
   return (
-    <section className="p-6 bg-gray-500">
-      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+    <section className="p-6 bg-gray-800 min-h-screen flex flex-col items-center">
+      <Paper sx={{ width: '90%', maxWidth: 1200, overflow: 'hidden' }} className="bg-gray-800 text-white shadow-lg">
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -96,7 +93,7 @@ export default function Adminsection() {
                   <TableCell
                     key={column.id}
                     align={column.align}
-                    style={{ minWidth: column.minWidth }}
+                    style={{ minWidth: column.minWidth, backgroundColor: '#444', color: '#fff' }} // Dark background for header
                   >
                     {column.label}
                   </TableCell>
@@ -111,7 +108,7 @@ export default function Adminsection() {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={column.id} align={column.align} style={{ backgroundColor: '#555', color: '#fff' }}>
                           {value}
                         </TableCell>
                       );
@@ -131,15 +128,15 @@ export default function Adminsection() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <div className="mt-6 flex items-center space-x-4">
+      <div className="flex flex-col items-center w-full max-w-md mt-6">
         <input
           type="text"
           value={spotNumber}
           onChange={(e) => setSpotNumber(e.target.value)}
           placeholder="Enter Spot Number"
-          className="input input-bordered w-1/3 px-4 py-2 border border-gray-300 rounded-md"
+          className="mb-4 w-full px-4 py-2 border border-gray-300 rounded-md"
         />
-        <button onClick={handleUpdate} className="btn btn-primary px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700">Update Spot</button>
+        <button onClick={handleUpdate} className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition">Update Spot</button>
       </div>
       <ToastContainer />
     </section>
