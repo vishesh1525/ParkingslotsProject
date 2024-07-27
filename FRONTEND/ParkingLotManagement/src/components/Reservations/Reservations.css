@@ -1,43 +1,51 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 50px;
-  }
-  
-  .form-container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .form-group input,
-  .form-group select {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 50px;
+}
+
+.form-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+  margin-bottom: 15px; 
+}
+
+.form-group label {
+  display: block;
+  color: white; /* Adjusted to white for better contrast */
+  font-size: 0.875rem; /* Equivalent to text-sm */
+  font-weight: bold;
+  margin-bottom: 0.5rem; /* Equivalent to mb-2 */
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  color: white;
+  font-size: 0.875rem; /* Equivalent to text-sm */
+  border: 1px solid #d1d5db; /* Equivalent to border-gray-300 */
+  padding: 0.75rem 1rem; /* Equivalent to px-4 py-3 */
+  border-radius: 0.375rem; /* Equivalent to rounded-md */
+  outline: 2px solid #3b82f6; /* Equivalent to outline-blue-600 */
+  background-color: #4b5563; /* Equivalent to bg-gray-700 */
+  box-sizing: border-box; /* Ensures padding does not affect width */
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

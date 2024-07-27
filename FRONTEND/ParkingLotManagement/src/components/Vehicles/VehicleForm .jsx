@@ -74,30 +74,34 @@ const VehicleForm = () => {
 
   return (
     <div 
-      className="flex flex-col items-center p-4 h-screen" 
+      className="flex flex-col items-center p-4 h-screen bg-gray-800" 
     >
       <div className="max-w-md w-full bg-transparent backdrop-blur-lg p-8 rounded-2xl shadow-lg">
         <h2 className="text-white text-center text-2xl font-bold">Vehicle Details</h2>
         <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+            <label className="block text-white text-sm font-bold mb-2" htmlFor="username">
               Username
             </label>
             <input
-              id="userName"
+              id="username"
+              name="username"
               type="text"
-              readOnly
+              className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-gray-700"
               value={username}
-              className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+              readOnly
             />
           </div>
+
+
+
           <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="vehicle_count">
+            <label className="block text-white  text-sm font-bold mb-2" htmlFor="vehicle_count">
               Vehicle Count
             </label>
             <select 
               name="vehicle_count" 
-              className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+              className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-gray-700"
               value={vehicleCount}
               onChange={handleVehicleCountChange}
             >
@@ -114,7 +118,7 @@ const VehicleForm = () => {
                   name={`license_plate_${index}`} 
                   type="text" 
                   required 
-                  className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
+                  className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-gray-700" 
                   placeholder="Vehicle Number (ex) - KA 05 1992" 
                   value={vehicle.license_plate} 
                   onChange={(e) => handleVehicleChange(index, 'license_plate', e.target.value)}
@@ -125,7 +129,7 @@ const VehicleForm = () => {
                   name={`color_${index}`} 
                   type="text" 
                   required 
-                  className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
+                  className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-gray-700" 
                   placeholder="Vehicle Color" 
                   value={vehicle.color} 
                   onChange={(e) => handleVehicleChange(index, 'color', e.target.value)}
@@ -135,7 +139,7 @@ const VehicleForm = () => {
                 <select 
                   name={`vehicle_type_${index}`} 
                   required 
-                  className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-gray-700"
                   value={vehicle.vehicle_type} 
                   onChange={(e) => handleVehicleChange(index, 'vehicle_type', e.target.value)}
                 >
@@ -148,7 +152,7 @@ const VehicleForm = () => {
                 <select 
                   name={`make_${index}`} 
                   required 
-                  className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                  className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-gray-700"
                   value={vehicle.make} 
                   onChange={(e) => handleVehicleChange(index, 'make', e.target.value)}
                 >
@@ -163,7 +167,7 @@ const VehicleForm = () => {
                   name={`model_${index}`} 
                   type="text" 
                   required 
-                  className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" 
+                  className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-gray-700" 
                   placeholder="Vehicle Model" 
                   value={vehicle.model} 
                   onChange={(e) => handleVehicleChange(index, 'model', e.target.value)}

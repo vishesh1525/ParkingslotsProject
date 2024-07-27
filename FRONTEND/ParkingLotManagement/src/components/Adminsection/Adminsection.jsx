@@ -134,7 +134,7 @@ export default function Adminsection() {
           value={spotNumber}
           onChange={(e) => setSpotNumber(e.target.value)}
           placeholder="Enter Spot Number"
-          className="mb-4 w-full px-4 py-2 border border-gray-300 rounded-md"
+          className="mb-4 w-full px-4 py-2 text-white border border-gray-300 rounded-md bg-gray-700"
         />
         <button onClick={handleUpdate} className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition">Update Spot</button>
       </div>

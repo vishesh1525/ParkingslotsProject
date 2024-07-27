@@ -65,42 +65,42 @@ const ReservationForm = () => {
       <h1 className="text-3xl font-bold mb-8 text-white">Reserve Parking Spot</h1>
       <form className="space-y-4 w-full max-w-md" onSubmit={handleSubmit}>
         <div>
-          <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="username">
+          <label className="block text-white text-sm font-bold mb-2" htmlFor="username">
             Username
           </label>
           <input
             id="username"
             name="username"
             type="text"
-            className="w-full text-gray-700 text-sm border border-gray-300 px-4 py-3 rounded-md"
+            className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-gray-700"
             value={username}
             readOnly
           />
         </div>
 
         <div>
-          <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="spotnumber">
+          <label className="block text-white text-sm font-bold mb-2" htmlFor="spotnumber">
             Spot Number
           </label>
           <input
             id="spotnumber"
             name="spotnumber"
             type="text"
-            className="w-full text-gray-700 text-sm border border-gray-300 px-4 py-3 rounded-md"
+            className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-gray-700"
             value={selectedSpot}
             readOnly
           />
         </div>
 
         <div>
-          <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="end_time">
+          <label className="block text-white text-sm font-bold mb-2" htmlFor="end_time">
             End Time
           </label>
           <input
             id="end_time"
             name="end_time"
             type="datetime-local"
-            className="w-full text-gray-700 text-sm border border-gray-300 px-4 py-3 rounded-md"
+            className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-gray-700"
             value={endTime}
             onChange={(e) => setEndTime(e.target.value)}
             required

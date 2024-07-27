@@ -112,48 +112,48 @@ const Payment = () => {
             {error && <p className="text-red-600 mb-4">{error}</p>}
             <form className="space-y-4 w-full max-w-md" onSubmit={handleSubmit}>
                 <div>
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+                    <label className="block text-white text-sm font-bold mb-2" htmlFor="username">
                         Username
                     </label>
                     <input
                         id="username"
                         type="text"
-                        className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                        className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-gray-700 bg-gray-700"
                         value={user || ''}
                         readOnly
                     />
                 </div>
                 <div>
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="spotnumber">
+                    <label className="block text-white text-sm font-bold mb-2" htmlFor="spotnumber">
                         Spot Number
                     </label>
                     <input
                         id="spotnumber"
                         type="text"
-                        className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                        className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-gray-700 bg-gray-700"
                         value={spotNumber || ''}
                         readOnly
                     />
                 </div>
                 <div className="mt-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="amount">
+                    <label className="block text-white text-sm font-bold mb-2" htmlFor="amount">
                         Amount
                     </label>
                     <input
                         id="amount"
                         type="number"
-                        className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                        className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-gray-700 bg-gray-700"
                         value={amount || ''}
                         readOnly
                     />
                 </div>
                 <div className="mt-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="payment_method">
+                    <label className="block text-white text-sm font-bold mb-2" htmlFor="payment_method">
                         Payment Method
                     </label>
                     <select
                         id="payment_method"
-                        className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                        className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-gray-700 bg-gray-700"
                         value={paymentMethod}
                         onChange={handlePaymentMethodChange}
                         required
@@ -164,25 +164,25 @@ const Payment = () => {
                 </div>
                 {paymentMethod === 'online-payment' && (
                     <div className="mt-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="upi_id">
+                        <label className="block text-white text-sm font-bold mb-2" htmlFor="upi_id">
                             UPI ID
                         </label>
                         <input
                             id="upi_id"
                             type="text"
-                            className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                            className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-gray-700 bg-gray-700 bg-gray-700"
                             value={upiId}
                             onChange={(e) => setUpiId(e.target.value)}
                         />
                     </div>
                 )}
                 <div>
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="vehicle_select">
+                    <label className="block text-white text-sm font-bold mb-2" htmlFor="vehicle_select">
                         Select Vehicle
                     </label>
                     <select
                         id="vehicle_select"
-                        className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                        className="w-full text-white text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600 bg-gray-700 bg-gray-700 bg-gray-700"
                         value={selectedVehicle}
                         onChange={handleVehicleChange}
                         required

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import logo from '../../assets/logo.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../../store/authSlice';
@@ -15,6 +14,7 @@ const CustomerForm = () => {
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
   const [phoneno, setPhoneno] = useState(['', '']); // Initialize as array
+  const [adminPass, setAdminPass] = useState(''); // Admin password state
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -24,12 +24,22 @@ const CustomerForm = () => {
       setPhoneno([value, phoneno[1]]);
     } else if (name === 'ph_no_2') {
       setPhoneno([phoneno[0], value]);
+    } else if (name === 'admin_pass') {
+      setAdminPass(value);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    // Check for admin password if role is Admin
+    if (role === 'Admin' && adminPass !== 'book123') {
+      setError('Invalid admin password.');
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await axios.post("http://localhost:7000/api/v1/signup", {
         username,
@@ -58,7 +68,7 @@ const CustomerForm = () => {
   };
 
   return (
-    <div className="bg-gray-800 min-h-screen ">
+    <div className="bg-gray-800 min-h-screen">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full">
           <a href="javascript:void(0)">
@@ -159,6 +169,19 @@ const CustomerForm = () => {
                   <option value="Admin">Admin</option>
                 </select>
               </div>
+              
+              {role === 'Admin' && (
+                <div>
+                  <input
+                    name="admin_pass"
+                    type="password"
+                    className="w-full text-gray-900 bg-gray-100 text-sm border border-gray-300 px-4 py-3 rounded-md placeholder-gray-600 focus:border-blue-500 focus:ring-blue-500"
+                    placeholder="Admin Password"
+                    value={adminPass}
+                    onChange={handleChange}
+                  />
+                </div>
+              )}
 
               <div className="!mt-8">
                 <button

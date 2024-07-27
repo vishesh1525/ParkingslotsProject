@@ -43,7 +43,7 @@ const Success = () => {
 
     if (loading) {
         return (
-            <div className='flex justify-center items-center h-screen text-2xl text-gray-800'>
+            <div className='flex justify-center items-center h-screen text-2xl text-gray-800 bg-gray-800'>
                 <div className='w-24 h-24 border-4 border-blue-500 border-t-transparent rounded-full animate-spin'></div>
             </div>
         );

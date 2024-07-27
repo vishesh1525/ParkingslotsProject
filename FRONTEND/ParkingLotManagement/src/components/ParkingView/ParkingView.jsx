@@ -44,7 +44,7 @@ const ParkingView = () => {
   }
 
   return (
-    <div className="flex flex-col items-center p-4">
+    <div className="flex flex-col items-center p-4 bg-gray-800">
       <h1 className="text-3xl font-bold mb-8">Parking Slots</h1>
       <div className="grid gap-4" style={{ gridTemplateRows: 'repeat(8, 50px)', gridTemplateColumns: 'repeat(3, 100px)' }}>
         {parkingSlots.map(slot => (

@@ -2,11 +2,11 @@ import { useState } from 'react';
 import axios from 'axios'; // Import axios for making HTTP requests
 import backgroundImage from '../../assets/contact.jpg'; // Import your background image here
 import 'react-toastify/dist/ReactToastify.css';
-
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+
 export default function Contact() {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [agreed, setAgreed] = useState(false);
   const [formData, setFormData] = useState({
     firstname: '',
@@ -34,15 +34,14 @@ export default function Contact() {
         formData
       );
       setSuccess('Message sent successfully!');
-      toast.success("We will reach back to you shortly Thank You ",{
+      toast.success("We will reach back to you shortly. Thank you!", {
         onClose: () => {
-          
           setTimeout(() => {
             navigate('/dashboard');
           }, 2000);
         }
       });
-      
+
       setError(null);
       setFormData({
         firstname: '',
@@ -53,7 +52,7 @@ export default function Contact() {
       });
       
     } catch (error) {
-      toast.error("Sorry app has Crashed")
+      toast.error("Sorry, the app has crashed.");
       setError('Failed to send message. Please try again.');
       console.error('Error submitting contact form:', error);
     }
@@ -71,210 +70,124 @@ export default function Contact() {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <div style={{ margin: '0 auto', maxWidth: '40rem', textAlign: 'center', backgroundColor: 'rgba(255, 255, 255, 0.8)', padding: '2rem', borderRadius: '0.375rem' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#111827' }}>Contact Us</h2>
-        <p style={{ marginTop: '0.5rem', fontSize: '1.125rem', lineHeight: '1.75rem', color: '#6B7280' }}>
+      <div className="mx-auto max-w-2xl text-center bg-white bg-opacity-80 p-8 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-bold text-gray-900">Contact Us</h2>
+        <p className="mt-2 text-lg text-gray-600">
           Have questions or need support? Feel free to reach out to us!
         </p>
       </div>
-      <form onSubmit={handleSubmit} style={{ margin: '4rem auto 0', maxWidth: '32rem', backgroundColor: 'rgba(255, 255, 255, 0.8)', padding: '2rem', borderRadius: '0.375rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem' }}>
+      <form onSubmit={handleSubmit} className="mx-auto mt-8 max-w-lg bg-white bg-opacity-80 p-8 rounded-lg shadow-lg">
+        <div className="grid gap-4">
           <div>
-            <label htmlFor="first-name" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', color: '#111827' }}>
+            <label htmlFor="first-name" className="block text-sm font-semibold text-gray-900">
               First name
             </label>
-            <div style={{ marginTop: '0.625rem' }}>
-              <input
-                id="first-name"
-                name="firstname"
-                type="text"
-                autoComplete="given-name"
-                placeholder="John"
-                value={formData.firstname}
-                onChange={handleChange}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  borderRadius: '0.375rem',
-                  padding: '0.625rem 0.875rem',
-                  color: 'white',
-                  boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-                  border: '1px solid #E5E7EB',
-                  fontSize: '0.875rem',
-                  lineHeight: '1.25rem',
-                }}
-              />
-            </div>
+            <input
+              id="first-name"
+              name="firstname"
+              type="text"
+              autoComplete="given-name"
+              placeholder="John"
+              value={formData.firstname}
+              onChange={handleChange}
+              className="w-full mt-2 bg-gray-800 text-white border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-600 focus:border-blue-600"
+            />
           </div>
           <div>
-            <label htmlFor="last-name" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', color: '#111827' }}>
+            <label htmlFor="last-name" className="block text-sm font-semibold text-gray-900">
               Last name
             </label>
-            <div style={{ marginTop: '0.625rem' }}>
-              <input
-                id="last-name"
-                name="lastname"
-                type="text"
-                autoComplete="family-name"
-                placeholder="Doe"
-                value={formData.lastname}
-                onChange={handleChange}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  borderRadius: '0.375rem',
-                  padding: '0.625rem 0.875rem',
-                  color: 'white',
-                  boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-                  border: '1px solid #E5E7EB',
-                  fontSize: '0.875rem',
-                  lineHeight: '1.25rem',
-                }}
-              />
-            </div>
+            <input
+              id="last-name"
+              name="lastname"
+              type="text"
+              autoComplete="family-name"
+              placeholder="Doe"
+              value={formData.lastname}
+              onChange={handleChange}
+              className="w-full mt-2 bg-gray-800 text-white border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-600 focus:border-blue-600"
+            />
           </div>
-          
           <div>
-            <label htmlFor="email" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', color: '#111827' }}>
+            <label htmlFor="email" className="block text-sm font-semibold text-gray-900">
               Email
             </label>
-            <div style={{ marginTop: '0.625rem' }}>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                placeholder="you@example.com"
-                value={formData.email}
-                onChange={handleChange}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  borderRadius: '0.375rem',
-                  padding: '0.625rem 0.875rem',
-                  color: 'white',
-                  boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-                  border: '1px solid #E5E7EB',
-                  fontSize: '0.875rem',
-                  lineHeight: '1.25rem',
-                }}
-              />
-            </div>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              placeholder="you@example.com"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full mt-2 bg-gray-800 text-white border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-600 focus:border-blue-600"
+            />
           </div>
           <div>
-            <label htmlFor="phone-number" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', color: '#111827' }}>
+            <label htmlFor="phone-number" className="block text-sm font-semibold text-gray-900">
               Phone number
             </label>
-            <div style={{ marginTop: '0.625rem' }}>
-              <input
-                id="phone-number"
-                name="phone"
-                type="tel"
-                autoComplete="tel"
-                placeholder="123-456-7890"
-                value={formData.phone}
-                onChange={handleChange}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  borderRadius: '0.375rem',
-                  padding: '0.625rem 0.875rem',
-                  color: 'white',
-                  boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-                  border: '1px solid #E5E7EB',
-                  fontSize: '0.875rem',
-                  lineHeight: '1.25rem',
-                }}
-              />
-            </div>
+            <input
+              id="phone-number"
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              placeholder="123-456-7890"
+              value={formData.phone}
+              onChange={handleChange}
+              className="w-full mt-2 bg-gray-800 text-white border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-600 focus:border-blue-600"
+            />
           </div>
           <div>
-            <label htmlFor="message" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', color: '' }}>
+            <label htmlFor="message" className="block text-sm font-semibold text-gray-900">
               Message
             </label>
-            <div style={{ marginTop: '0.625rem' }}>
-              <textarea
-                id="message"
-                name="message"
-                rows={4}
-                placeholder="Your message here..."
-                value={formData.message}
-                onChange={handleChange}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  borderRadius: '0.375rem',
-                  padding: '0.625rem 0.875rem',
-                  color: 'white',
-                  boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-                  border: '1px solid #E5E7EB',
-                  fontSize: '0.875rem',
-                  lineHeight: '1.25rem',
-                }}
-              />
-            </div>
+            <textarea
+              id="message"
+              name="message"
+              rows={4}
+              placeholder="Your message here..."
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full mt-2 bg-gray-800 text-white border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-600 focus:border-blue-600"
+            />
           </div>
-          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          <div className="flex items-center gap-3">
             <input
               type="checkbox"
               checked={agreed}
               onChange={() => setAgreed(!agreed)}
-              style={{
-                width: '1rem',
-                height: '1rem',
-                borderRadius: '0.25rem',
-                backgroundColor: agreed ? '#4F46E5' : '#E5E7EB',
-                border: '1px solid #E5E7EB',
-                marginRight: '0.5rem',
-                cursor: 'pointer',
-              }}
+              className="w-4 h-4 text-blue-600 bg-gray-800 border-gray-300 rounded focus:ring-blue-600"
             />
-            <label style={{ fontSize: '0.875rem', lineHeight: '1.25rem', color: '#6B7280' }}>
+            <label className="text-sm text-gray-600">
               By selecting this, you agree to our{' '}
-              <a href="#" style={{ fontWeight: '600', color: '#4F46E5' }}>
+              <a href="#" className="font-semibold text-blue-600">
                 privacy&nbsp;policy
               </a>
               .
             </label>
           </div>
         </div>
-        <div style={{ marginTop: '2.5rem' }}>
+        <div className="mt-6">
           <button
             type="submit"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: '0.375rem',
-              padding: '0.75rem 1.5rem',
-              backgroundColor: '#4F46E5',
-              color: 'white',
-              fontWeight: '600',
-              fontSize: '0.875rem',
-              lineHeight: '1.25rem',
-              border: '1px solid transparent',
-              boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-              cursor: 'pointer',
-              transition: 'background-color 0.2s ease-in-out',
-            }}
-            onMouseOver={(e) => (e.target.style.backgroundColor = '#4338CA')}
-            onMouseOut={(e) => (e.target.style.backgroundColor = '#4F46E5')}
+            className="w-full py-3 px-4 text-sm font-semibold text-white bg-blue-600 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
           >
             Send message
           </button>
           {error && (
-            <p style={{ marginTop: '1rem', color: 'red', fontSize: '0.875rem' }}>
+            <p className="mt-4 text-red-600 text-sm">
               {error}
             </p>
           )}
           {success && (
-            <p style={{ marginTop: '1rem', color: 'green', fontSize: '0.875rem' }}>
+            <p className="mt-4 text-green-600 text-sm">
               {success}
             </p>
           )}
         </div>
       </form>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 }
