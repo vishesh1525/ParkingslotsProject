@@ -15,7 +15,11 @@ import {
   VehicleForm,
   ReservationForm,
   Logout,
-  Adminsection
+  Adminsection,
+  Reservations,
+  ForgotPassword,
+  ResetPassword,
+  
 } from './index.js';
 import { Provider } from 'react-redux';
 import store from './store/store.js';
@@ -33,6 +37,9 @@ const router = createBrowserRouter(
       <Route path='about' element={<About />} />
       <Route path='vehicleRegistration' element={<VehicleForm />} />
       <Route path='parkingSpots' element={<ParkingView />} />
+      <Route path="forgot" element={<ForgotPassword/>}/>
+      <Route path="reset" element={<ResetPassword/>}/>
+      <Route path="Reservations2" element={<Reservations/>}/>
       <Route path='parkingSpots/reservation/:spotNumber' element={<ReservationForm />} />
       <Route path='/Adminlogin' element={<Adminsection />} />
       <Route path='payment/:spotNumber' element={<Payment />} />

@@ -5,6 +5,7 @@ import paymentsucess from "../../assets/paymetSuccess.gif";
 import { TiTick } from "react-icons/ti";
 import { FaRupeeSign } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import sound from "../../assets/sound.mp4";
 
 const Success = () => {
     const [loading, setLoading] = useState(true);
@@ -13,6 +14,12 @@ const Success = () => {
     const [cost, setCost] = useState('');
     const navigate = useNavigate();
     const username = useSelector((state) => state.auth.user.username);
+
+    useEffect(() => {
+        // Play sound when component mounts
+        const audio = new Audio(sound);
+        audio.play();
+    }, []);
 
     useEffect(() => {
         const getPaymentInfo = async () => {
@@ -58,7 +65,10 @@ const Success = () => {
     }
 
     return (
-        <section className="flex flex-col items-center p-4 h-screen items-center justify-center" >
+        <section className="flex flex-col items-center p-4 h-screen items-center justify-center">
+            {/* Audio Element */}
+            <audio src={sound} autoPlay className="hidden"></audio>
+
             <div className='w-full max-w-lg bg-white rounded-lg shadow-lg p-6'>
                 <div className='flex flex-col items-center text-center'>
                     <img

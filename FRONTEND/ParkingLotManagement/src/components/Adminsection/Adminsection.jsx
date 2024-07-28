@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -27,7 +28,8 @@ export default function Adminsection() {
   const [spotNumber, setSpotNumber] = React.useState('');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
+  const user=useSelector((state) => state.auth.user.username);
+  console.log(user)
   React.useEffect(() => {
     const fetchData = async () => {
       try {
@@ -78,7 +80,7 @@ export default function Adminsection() {
       await axios.delete(
         "http://localhost:7000/api/v1/ParkingSpots",
         {
-          data: { spot_number: spotNumber },
+          data: { username:user,spot_number: spotNumber },
           withCredentials: true
         }
       );

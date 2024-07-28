@@ -16,6 +16,8 @@ import Success from "./components/Payment/Success";
 import Logout from "./components/Auth/Logout";
 import ReservationForm from "./components/Vehicles/Reservation";
 import Adminsection from "./components/Adminsection/Adminsection";
+import ResetPassword from "./components/Auth/Resetpassword";
+import ForgotPassword from "./components/Auth/Forgotpassword";
 export {
   About,
   CustomerForm,
@@ -31,6 +33,9 @@ export {
   Payment,
   AddSlot,
   Success,
-  Adminsection
+  Adminsection,
+  Reservations,
+  ForgotPassword,
+  ResetPassword
 };
 
