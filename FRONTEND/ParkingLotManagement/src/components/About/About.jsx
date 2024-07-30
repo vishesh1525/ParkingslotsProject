@@ -5,19 +5,19 @@ import shreyas from "../../assets/shreyas.jpg";
 import vishesh from "../../assets/vi.jpg";
 
 export default function About() {
-    const message = `There are many variations of passages of Lorem Ipsum available but the \n majority have suffered alteration in some injected humour.`;
+    const message = `At "Book My Spot", we are dedicated to revolutionizing the way you find and reserve parking spaces. Our team consists of passionate individuals with diverse expertise in information science and technology. We strive to provide a seamless and efficient experience for all our users, making parking hassle-free and convenient.`;
 
     return (
         <section className="bg-gray-800 min-h-screen py-20">
-            <div className="container mx-auto">
-                <div className="text-center mb-10">
-                    <h2 className="text-4xl font-bold mb-4 text-white">The Team Behind Book My Spot</h2>
+            <div className="container mx-auto px-4">
+                <div className="text-center mb-10 max-w-3xl mx-auto">
+                    <h2 className="text-4xl font-bold mb-7 text-white">The Team Behind Book My Spot</h2>
                     <p className="whitespace-pre-line text-gray-300">{message}</p>
                 </div>
                 <div className="flex flex-wrap justify-center">
                     {[
-                        { name: "Shreyas DK", img: shreyas, description: "I am Shreyas DK, an Information Science student at BMS College of Engineering. My passion for technology and innovation drives me to explore the vast realms of data science, machine learning, and software development. I am dedicated to honing my skills and knowledge to contribute meaningfully to the tech industry. Outside of academics, I enjoy working on personal projects, participating in hackathons, and staying updated with the latest technological advancements..", role: "1BM22IS187" },
-                        { name: "Somaath Mikali", img: somi, description: "I am Somaath Mikali, currently pursuing Information Science at BMS College of Engineering. With a keen interest in blockchain technology and network engineering, I am dedicated to developing a profound understanding of these areas to enhance decentralized applications and connectivity. I thrive on challenges and enjoy solving complex problems. Besides my academic pursuits, I am an avid reader and enjoy exploring the latest trends in technology and cybersecurity..", role: "1BM22IS196" },
+                        { name: "Shreyas DK", img: shreyas, description: "I am Shreyas DK, an Information Science student at BMS College of Engineering. My passion for technology and innovation drives me to explore the vast realms of data science, machine learning, and software development. I am dedicated to honing my skills and knowledge to contribute meaningfully to the tech industry. Outside of academics, I enjoy working on personal projects, participating in hackathons, and staying updated with the latest technological advancements.", role: "1BM22IS187" },
+                        { name: "Somaath Mikali", img: somi, description: "I am Somaath Mikali, currently pursuing Information Science at BMS College of Engineering. With a keen interest in blockchain technology and network engineering, I am dedicated to developing a profound understanding of these areas to enhance decentralized applications and connectivity. I thrive on challenges and enjoy solving complex problems. Besides my academic pursuits, I am an avid reader and enjoy exploring the latest trends in technology and cybersecurity.", role: "1BM22IS196" },
                         { name: "Vishesh P Gowda", img: vishesh, description: "I am Vishesh P Gowda, an Information Science student at BMS College of Engineering. My academic interests lie in artificial intelligence, data analysis, and software engineering. I am committed to leveraging technology to create innovative solutions that address real-world problems. My enthusiasm for learning and growth extends beyond the classroom, as I actively engage in coding competitions and collaborative projects. In my free time, I enjoy experimenting with new technologies and staying informed about industry developments.", role: "1BM22IS232" }
                     ].map((member, index) => (
                         <div key={index} className="w-full sm:w-6/12 md:w-4/12 lg:w-3/12 p-4">
