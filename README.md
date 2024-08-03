@@ -38,6 +38,7 @@ This project is a web application that allows users to book vehicle parking spot
 9. Navigate to FRONTEND/ParkingLotManagement
 10. npm run dev
 11. It will run in http://localhost:5173
+12. While registering on clicking role as admin we set password to hard coded value of book123.
 
 
 ## Usage
