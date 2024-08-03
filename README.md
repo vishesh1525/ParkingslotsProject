@@ -28,15 +28,19 @@ This project is a web application that allows users to book vehicle parking spot
    ```bash
    git clone https://github.com/vishesh1525/ParkingslotsProject.git
 2. Navigate to BACKEND/Backendtemplate
-3. npm i
+   ```bash
+   npm i
 4. Navigate to FRONTEND/ParkingLotManagement
-5. npm i
+   ```bash
+   npm i
 6. Inside Backendtemplate you will see .env.example file
    rename it to .env and add details as mentioned there
 7. Navigate to BACKEND/Backendtemplate
-8. npm run dev
+   ```bash
+   npm run dev
 9. Navigate to FRONTEND/ParkingLotManagement
-10. npm run dev
+   ```bash
+   npm run dev
 11. It will run in http://localhost:5173
 12. While registering on clicking role as admin we set password to hard coded value of book123.
 
